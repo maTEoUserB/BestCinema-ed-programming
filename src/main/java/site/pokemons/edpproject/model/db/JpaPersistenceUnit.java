@@ -1,4 +1,4 @@
-package site.pokemons.edpproject.service;
+package site.pokemons.edpproject.model.db;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

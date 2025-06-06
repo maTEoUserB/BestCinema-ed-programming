@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox fx:controller="site.pokemons.edpproject.controller.MovieListCellController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="60.0" prefWidth="312.0">
+         <children>
+            <Label fx:id="titleLabel" prefHeight="27.0" prefWidth="315.0" text="Tytuł" />
+            <Label fx:id="overviewLabel" prefHeight="57.0" prefWidth="314.0" text="Opis" />
+         </children>
+      </VBox>
+      <VBox prefHeight="84.0" prefWidth="158.0">
+         <children>
+            <TextField fx:id="priceField" promptText="Cena" />
+            <TextField fx:id="hallField" promptText="Sala" />
+            <DatePicker fx:id="datePicker" promptText="Data" />
+         </children>
+      </VBox>
+      <VBox prefHeight="104.0" prefWidth="130.0">
+         <children>
+            <Label text="Godzina" />
+            <Spinner fx:id="hourSpinner" />
+            <Label text="Minuta" />
+            <Spinner fx:id="minuteSpinner" />
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Zapisz w repertuarze" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
