@@ -5,23 +5,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RegisterController">
+<AnchorPane prefHeight="391.0" prefWidth="500.0" stylesheets="@../../../../styles/registerStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RegisterController">
    <children>
-      <VBox layoutX="163.0" layoutY="7.0" prefHeight="295.0" prefWidth="174.0">
+      <VBox layoutX="147.0" layoutY="7.0" prefHeight="346.0" prefWidth="207.0" styleClass="vbox">
          <children>
             <Label fx:id="infoLabel" />
             <Label fx:id="usernameLb" text="Nazwa użytkownika" />
-            <TextField fx:id="usernameText" />
+            <TextField fx:id="usernameText" styleClass="text-field" />
             <Label fx:id="passwdLb" text="Hasło" />
-            <TextField fx:id="passwdText" />
+            <PasswordField fx:id="passwdText" styleClass="text-field" />
             <Label fx:id="cfPasswdLb" text="Powtórz hasło" />
-            <TextField fx:id="cfPasswdText" />
+            <PasswordField fx:id="cfPasswdText" styleClass="text-field" />
             <CheckBox fx:id="agreeCheck" mnemonicParsing="false" prefHeight="40.0" prefWidth="174.0" text="Zgoda na regulamin" />
-            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#registerHandle" text="Zarejestruj się" />
+            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#registerHandle" styleClass="register-button" text="Zarejestruj się" />
+            <Label fx:id="loginLabel" onMouseClicked="#loginLoadHandle" text="Przejdź do logowania" />
          </children>
       </VBox>
    </children>

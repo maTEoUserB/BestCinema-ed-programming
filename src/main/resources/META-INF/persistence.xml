@@ -8,14 +8,22 @@
     <persistence-unit name="myPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>site.pokemons.edpproject.model.Account</class>
+        <class>site.pokemons.edpproject.model.Admin</class>
+        <class>site.pokemons.edpproject.model.User</class>
+        <class>site.pokemons.edpproject.model.Movie</class>
+        <class>site.pokemons.edpproject.model.CinemaHall</class>
+        <class>site.pokemons.edpproject.model.Seat</class>
+        <class>site.pokemons.edpproject.model.Screening</class>
+        <class>site.pokemons.edpproject.model.Reservation</class>
+        <class>site.pokemons.edpproject.model.ReservationSeat</class>
+
 
         <properties>
 
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="${db.url}"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cinema-db"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-            <property name="jakarta.persistence.jdbc.password" value="${db.password}"/>
+            <property name="jakarta.persistence.jdbc.password" value="pierogi987"/>
 
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
