@@ -4,6 +4,8 @@ import jakarta.mail.MessagingException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import lombok.Setter;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.service.EmailService;
@@ -18,6 +20,8 @@ public class RepertoireListCellController {
     @FXML
     private Label startTimeLabel;
     @FXML
+    private ImageView image;
+    @FXML
     private Button bookSeatsButton;
 
     @Setter
@@ -28,6 +32,7 @@ public class RepertoireListCellController {
         titleLabel.setText(screening.getTitle());
         overviewLabel.setText(screening.getDescription());
         startTimeLabel.setText(screening.getStartTime().toString());
+        image.setImage(new Image(screening.getImageUrl(), true));
 
         bookSeatsButton.setOnAction(event -> {
             String toEmail = "bobinskimateusz265@gmail.com";

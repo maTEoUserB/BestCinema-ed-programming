@@ -10,7 +10,7 @@
 
 <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.MovieListCellController">
    <children>
-      <VBox prefHeight="60.0" prefWidth="312.0">
+      <VBox prefHeight="200.0" prefWidth="554.0">
          <children>
             <Label fx:id="titleLabel" prefHeight="27.0" prefWidth="315.0" text="Tytuł" />
             <Label fx:id="overviewLabel" prefHeight="57.0" prefWidth="314.0" text="Opis" />
@@ -23,13 +23,13 @@
             <DatePicker fx:id="datePicker" promptText="Data" />
          </children>
       </VBox>
-      <VBox prefHeight="104.0" prefWidth="130.0">
+      <VBox prefHeight="200.0" prefWidth="146.0">
          <children>
             <Label text="Godzina" />
             <Spinner fx:id="hourSpinner" />
             <Label text="Minuta" />
             <Spinner fx:id="minuteSpinner" />
-            <Button fx:id="saveButton" mnemonicParsing="false" text="Zapisz w repertuarze" />
+            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="142.0" text="Zapisz w repertuarze" />
          </children>
       </VBox>
    </children>

@@ -21,6 +21,8 @@ public class Movie {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column
+    private String imageUrl;
 
     @Column(unique = true)
     private long externalApiId;
@@ -28,9 +30,10 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<Screening> screenings;
 
-    public Movie(String title, String overview, long id) {
+    public Movie(String title, String overview, String imageUrl, long id) {
         this.title = title;
         this.description = overview;
+        this.imageUrl = imageUrl;
         this.externalApiId = id;
     }
 }

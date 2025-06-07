@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="570.0" prefWidth="900.0" stylesheets="@../../../../styles/loginStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.LoginController">
+<AnchorPane prefHeight="570.0" prefWidth="910.0" stylesheets="@../../../../styles/loginStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.LoginController">
    <children>
-      <VBox layoutX="339.0" layoutY="162.0" prefHeight="246.0" prefWidth="222.0" styleClass="vbox">
+      <VBox layoutX="344.0" layoutY="147.0" prefHeight="246.0" prefWidth="222.0" styleClass="vbox">
          <children>
             <Label fx:id="infoLabel" />
             <Label fx:id="usernameLb" text="Nazwa użytkownika" />

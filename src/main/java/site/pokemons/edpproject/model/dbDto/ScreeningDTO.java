@@ -18,4 +18,5 @@ public class ScreeningDTO {
     private LocalDateTime startTime;
     private String title;
     private String description;
+    private String imageUrl;
 }
