@@ -27,10 +27,8 @@ public class MovieListCellController {
         minuteSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
     }
 
-    //    private MovieDTO movie;
 
     public void setData(MovieDTO movie) {
-//        this.movie = movie;
         titleLabel.setText(movie.getTitle());
         overviewLabel.setText(movie.getOverview());
 

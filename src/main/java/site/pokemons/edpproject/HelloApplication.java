@@ -9,8 +9,6 @@ import site.pokemons.edpproject.controller.AdminController;
 import site.pokemons.edpproject.controller.LoginController;
 import site.pokemons.edpproject.controller.RegisterController;
 import site.pokemons.edpproject.controller.RepertoireController;
-import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
-import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
 import site.pokemons.edpproject.service.MovieService;
 import site.pokemons.edpproject.service.ScreeningService;
 import site.pokemons.edpproject.service.TmdbApiService;
@@ -33,9 +31,10 @@ public class HelloApplication extends Application {
 
         //REPERTOIRE
         FXMLLoader fxmlRepertoireLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/repertoire-view.fxml"));
+        RepertoireController repertoireController = new RepertoireController(screeningService);
         fxmlRepertoireLoader.setControllerFactory(type -> {
             if (type == RepertoireController.class) {
-                return new RepertoireController();
+                return repertoireController;
             } else {
                 try {
                     return type.getDeclaredConstructor().newInstance();
@@ -49,12 +48,11 @@ public class HelloApplication extends Application {
         views.put("repertoire-view", repertoireView);
 
         //ADMIN
-//        TmdbApiService tmdbApiService = new TmdbApiService();
-//        NowPlayingResponse movies = tmdbApiService.getMovieList();
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
+        AdminController adminController =  new AdminController(tmdbApiService, screeningService);
         fxmlAdminLoader.setControllerFactory(type -> {
             if (type == AdminController.class) {
-                return new AdminController(tmdbApiService, screeningService);
+                return adminController;
             } else {
                 try {
                     return type.getDeclaredConstructor().newInstance();
@@ -69,10 +67,9 @@ public class HelloApplication extends Application {
 
         //LOGIN
         FXMLLoader fxmlLoginLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/login-view.fxml"));
+        LoginController loginController = new LoginController(userService);
         fxmlLoginLoader.setControllerFactory(type -> {
             if (type == LoginController.class) {
-                LoginController loginController = new LoginController(userService, views);
-                loginController.setPrimaryStage(stage);
                 return loginController;
             } else {
                 try {
@@ -86,17 +83,14 @@ public class HelloApplication extends Application {
         Parent loginView = fxmlLoginLoader.load();
         views.put("login-view", loginView);
 
-
-
         //WEJŚCIOWE OKNO REJESTRACJI
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
-        fxmlLoader.setControllerFactory(type -> {
+        FXMLLoader fxmlRegisterLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
+        RegisterController regController = new RegisterController(userService);
+        fxmlRegisterLoader.setControllerFactory(type -> {
                 if(type == RegisterController.class){
-                    RegisterController regController = new RegisterController(userService, views);
-                    regController.setPrimaryStage(stage);
                     return regController;
                 }else if(type == LoginController.class){
-                    return new LoginController(userService, views);
+                    return loginController;
                 }else{
                     try{
                         return type.getDeclaredConstructor().newInstance();
@@ -106,8 +100,25 @@ public class HelloApplication extends Application {
                     }
                 }
         });
+        Parent registerView = fxmlRegisterLoader.load();
+        views.put("register-view", registerView);
 
-        Scene scene = new Scene(fxmlLoader.load());
+        regController.setViews(views);
+        adminController.setViews(views);
+        loginController.setViews(views);
+        repertoireController.setViews(views);
+
+        Scene scene = new Scene(registerView);
+        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        regController.setScene(scene);
+        repertoireController.setScene(scene);
+        adminController.setScene(scene);
+        loginController.setScene(scene);
+
+//        stage.setMaximized(true);
+//        stage.setResizable(true);
+        stage.setWidth(900);
+        stage.setHeight(570);
         stage.setTitle("BestCinema");
         stage.setScene(scene);
         stage.show();

@@ -7,11 +7,14 @@ import site.pokemons.edpproject.model.CinemaHall;
 import site.pokemons.edpproject.model.Movie;
 import site.pokemons.edpproject.model.Screening;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
+import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScreeningService {
     private final MovieService movieService;
@@ -58,5 +61,31 @@ public class ScreeningService {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public List<ScreeningDTO> findScreenings(LocalDate date) {
+        EntityManager em = JpaPersistenceUnit.getEntityManager();
+
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+        List<Screening> screenings = em.createQuery(
+                     "SELECT s FROM Screening s " +
+                        "JOIN FETCH s.movie " +
+                        "WHERE s.startTime BETWEEN :start AND :end",
+                        Screening.class)
+                .setParameter("start", startOfDay)
+                .setParameter("end", endOfDay)
+                .getResultList();
+
+        return screenings.stream().map(s -> {
+            ScreeningDTO screeningDTO = new ScreeningDTO();
+            screeningDTO.setScreeningId(s.getScreeningId());
+            screeningDTO.setPrice(s.getPrice());
+            screeningDTO.setHallId(s.getHall().getHallId());
+            screeningDTO.setStartTime(s.getStartTime());
+            screeningDTO.setTitle(s.getMovie().getTitle());
+            screeningDTO.setDescription(s.getMovie().getDescription());
+            return screeningDTO;
+        }).collect(Collectors.toList());
     }
 }

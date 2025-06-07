@@ -17,8 +17,10 @@ public class UserService {
         EntityManager em = JpaPersistenceUnit.getEntityManager();
 
         try{
-            User user = em.createQuery("SELECT a FROM User a WHERE a.username = :username", User.class)
-                            .setParameter("username", username).getResultStream().findFirst().orElse(null);
+//            User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+//                            .setParameter("username", username).getResultStream().findFirst().orElse(null);
+            User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                    .setParameter("username", username).getSingleResult();
             if(user == null) throw new EntityNotFoundException("User " + username + " not found");
 
             if(BCrypt.checkpw(password, user.getPasswordHash())){
