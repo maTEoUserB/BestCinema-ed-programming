@@ -85,6 +85,7 @@ public class ScreeningService {
             screeningDTO.setStartTime(s.getStartTime());
             screeningDTO.setTitle(s.getMovie().getTitle());
             screeningDTO.setDescription(s.getMovie().getDescription());
+            screeningDTO.setImageUrl(s.getMovie().getImageUrl());
             return screeningDTO;
         }).collect(Collectors.toList());
     }

@@ -1,10 +1,11 @@
 .vbox {
+    -fx-background-color: #262323;
     -fx-padding: 20;
     -fx-spacing: 10;
     -fx-alignment: center;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, #5e20c6, 10, 0, 0, 2);
 }
 
 .register-button {
@@ -13,7 +14,7 @@
     -fx-padding: 8 16 8 16;
     -fx-background-radius: 5;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.1, 0, 1);
+    -fx-effect: dropshadow(gaussian, #5e20c6, 4, 0.1, 0, 1);
 }
 
 .label {
@@ -25,4 +26,8 @@
     -fx-pref-width: 200;
     -fx-padding: 6;
     -fx-background-radius: 4;
+}
+
+.check-box {
+    -fx-text-fill: white;
 }

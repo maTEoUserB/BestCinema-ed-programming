@@ -20,7 +20,8 @@ public class MovieService {
         try{
             tx.begin();
 
-            Movie newMovie = new Movie(movieDTO.getTitle(), movieDTO.getOverview(), movieDTO.getId());
+            String imageUrl = "https://image.tmdb.org/t/p/w200" + movieDTO.getPosterPath();
+            Movie newMovie = new Movie(movieDTO.getTitle(), movieDTO.getOverview(), imageUrl, movieDTO.getId());
             em.persist(newMovie);
 
             showAlert("Film zapisano do bazy!", Alert.AlertType.INFORMATION);

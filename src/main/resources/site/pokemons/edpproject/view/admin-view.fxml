@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="570.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.AdminController">
+<AnchorPane prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.AdminController">
    <children>
-      <HBox prefHeight="46.0" prefWidth="900.0">
+      <HBox prefHeight="46.0" prefWidth="910.0">
          <children>
             <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" text="Wyloguj" />
          </children>
       </HBox>
-      <ListView fx:id="movieList" layoutX="-2.0" layoutY="50.0" prefHeight="520.0" prefWidth="900.0" />
+      <ListView fx:id="movieList" layoutX="-2.0" layoutY="50.0" prefHeight="520.0" prefWidth="910.0" />
    </children>
 </AnchorPane>
