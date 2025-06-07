@@ -3,11 +3,11 @@ package site.pokemons.edpproject.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 
@@ -15,9 +15,10 @@ import java.util.Map;
 
 public class RegisterController {
     @Setter
-    private Stage primaryStage;
+    private Scene scene;
     private final UserService userService;
-    private final Map<String, Parent> views;
+    @Setter
+    private Map<String, Parent> views;
 
     @FXML
     private TextField usernameText;
@@ -30,9 +31,8 @@ public class RegisterController {
     @FXML
     private Label infoLabel;
 
-    public RegisterController(UserService userService, Map<String, Parent> views) {
+    public RegisterController(UserService userService) {
         this.userService = userService;
-        this.views = views;
     }
 
     @FXML
@@ -40,30 +40,48 @@ public class RegisterController {
 
         if (!agreeCheck.isSelected()) {
             infoLabel.setText("Zaznacz zgodę.");
+            showAlert("Zaznacz zgodę.", Alert.AlertType.ERROR);
             return;
         }
 
         if (!passwdText.getText().equals(cfPasswdText.getText())) {
             infoLabel.setText("Hasła nie są identyczne.");
+            showAlert("Hasła nie są identyczne.", Alert.AlertType.ERROR);
             return;
         }
 
         boolean reg = userService.registerUser(usernameText.getText(), passwdText.getText());
         if (reg) {
             infoLabel.setText("Pomyślnie zarejestrowano.");
+            showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);
+            clearRegisterPage();
 
-            Scene scene = new Scene(views.get("login-view"));
-            primaryStage.setScene(scene);
+            scene.setRoot(views.get("repertoire-view"));
 
             return;
         }
 
         infoLabel.setText("Konto o takiej nazwie już istnieje.");
+        showAlert("Konto o takiej nazwie już istnieje.", Alert.AlertType.ERROR);
     }
 
     @FXML
     public void loginLoadHandle(MouseEvent mouseEvent) {
-        Scene scene = new Scene(views.get("login-view"));
-        primaryStage.setScene(scene);
+        scene.setRoot(views.get("login-view"));
+    }
+
+    private void clearRegisterPage() {
+        usernameText.clear();
+        passwdText.clear();
+        cfPasswdText.clear();
+        agreeCheck.setSelected(false);
+        infoLabel.setText("");
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

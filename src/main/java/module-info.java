@@ -15,7 +15,7 @@ module site.pokemons.edpproject {
     requires org.apache.httpcomponents.httpcore;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
-    requires java.desktop;
+    requires jakarta.mail;
     opens site.pokemons.edpproject.model to org.hibernate.orm.core;
     exports site.pokemons.edpproject.controller;
     opens site.pokemons.edpproject.controller to javafx.fxml;
@@ -23,6 +23,7 @@ module site.pokemons.edpproject {
     opens site.pokemons.edpproject.service to javafx.fxml;
 
     exports site.pokemons.edpproject.model.tmdbApiDto to com.fasterxml.jackson.databind;
+    exports site.pokemons.edpproject.model.dbDto;
     exports site.pokemons.edpproject.model.db;
     opens site.pokemons.edpproject.model.db to javafx.fxml;
 }

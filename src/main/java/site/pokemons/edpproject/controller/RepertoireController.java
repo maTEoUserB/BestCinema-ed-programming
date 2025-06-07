@@ -1,70 +1,46 @@
 package site.pokemons.edpproject.controller;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.VBox;
-import site.pokemons.edpproject.model.Movie;
-import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import lombok.Setter;
+import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
+import site.pokemons.edpproject.service.ScreeningService;
+import site.pokemons.edpproject.session.SessionContext;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class RepertoireController {
+    @Setter
+    private Scene scene;
+    @Setter
+    private Map<String, Parent> views;
+    private final ScreeningService screeningService;
 
-    public RepertoireController() {}
+    @FXML private DatePicker datePicker;
+    @FXML private ListView<ScreeningDTO> repertoireList;
 
-    @FXML
-    public final void onSelectionChanged(Event event){
-        EntityManager em = JpaPersistenceUnit.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
+    public RepertoireController(ScreeningService screeningService) {
+        this.screeningService = screeningService;
+    }
 
-        Object source = event.getSource();
-        Tab tab = null;
-        if(!(source instanceof Tab)){
-            return;
-        }
-        tab = (Tab) source;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate startDate = LocalDate.parse(tab.getText(), formatter);
-        LocalDateTime startTime = startDate.atStartOfDay();
-        LocalDateTime endTime = startDate.plusDays(1).atStartOfDay();
+    public void loadRepertoire(MouseEvent mouseEvent) {
+        List<ScreeningDTO> screenings = screeningService.findScreenings(datePicker.getValue());
+        repertoireList.getItems().setAll(screenings);
 
-        List<Movie> movies = List.of();
+        repertoireList.setCellFactory(listCell -> new RepertoireListCell(screeningService));
+    }
 
-        try{
-//            TypedQuery<Movie> query = em.createQuery("SELECT m" +
-//                    " FROM Movie m" +
-//                    " WHERE m.date >= :startTime" +
-//                    " AND m.date < :endTime", Movie.class);
-//            query.setParameter("startTime", startTime);
-//            query.setParameter("endTime", endTime);
+    public void logoutButtonClick(MouseEvent mouseEvent) {
+        SessionContext.clear();
+        showLoginPanel();
+    }
 
-            TypedQuery<Movie> query = em.createQuery("SELECT m" +
-                    " FROM Movie m", Movie.class);
-
-            movies = query.getResultStream().toList();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            if(em.isOpen()) em.close();
-        }
-
-        VBox vBox = new VBox();
-        for(Movie m : movies) {
-            VBox movieBox = new VBox();
-            movieBox.setSpacing(10);
-//            movieBox.getChildren().addAll(new Label(m.getTitle()), new Label(m.getDescription()),
-//                    new Label(m.getDate().toLocalTime().toString()), new Label(""+m.getHall()+""));
-
-            vBox.getChildren().add(movieBox);
-        }
-
-        tab.setContent(vBox);
+    private void showLoginPanel() {
+        scene.setRoot(views.get("login-view"));
     }
 }

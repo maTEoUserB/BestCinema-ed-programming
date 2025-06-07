@@ -1,48 +1,45 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 import site.pokemons.edpproject.session.SessionContext;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class LoginController {
     @Setter
-    private Stage primaryStage;
+    private Scene scene;
     private final UserService userService;
-    private final Map<String, Parent> views;
+    @Setter
+    private Map<String, Parent> views;
 
     @FXML private TextField usernameText;
     @FXML private TextField passwdText;
     @FXML private Label infoLabel;
 
-    public LoginController(UserService userService, Map<String, Parent> views) {
+    public LoginController(UserService userService) {
         this.userService = userService;
-        this.views = views;
     }
 
     @FXML
     public void loginHandle(MouseEvent mouseEvent) {
         boolean log = userService.loginUser(usernameText.getText(), passwdText.getText());
+        clearLoginPage();
 
-        System.out.println("===============================loginHandle() - log: " + log + "===============================");
         if(log){
             infoLabel.setText("Pomyslnie zalogowano.");
+            showAlert("Pomyślnie zalogowano.", Alert.AlertType.INFORMATION);
 
             if(userService.getAccountById(SessionContext.getLoggedInUserId()).getRole().equals("USER")){
-                System.out.println("===============================loginHandle() if USER===============================");
                 showUserPanel();
             }else if(userService.getAccountById(SessionContext.getLoggedInUserId()).getRole().equals("ADMIN")){
-                System.out.println("===============================loginHandle() if ADMIN===============================");
                 showAdminPanel();
             }
 
@@ -50,17 +47,31 @@ public class LoginController {
         }
 
         infoLabel.setText("Błdne dane logowania.");
+        showAlert("Błdne dane logowania.", Alert.AlertType.ERROR);
+    }
+
+    private void clearLoginPage() {
+        usernameText.clear();
+        passwdText.clear();
+        infoLabel.setText("");
     }
 
     private void showUserPanel() {
-        System.out.println("===============================USER PANEL===============================");
-        Scene scene = new Scene(views.get("repertoire-view"));
-        primaryStage.setScene(scene);
+        scene.setRoot(views.get("repertoire-view"));
     }
 
     private void showAdminPanel() {
-        System.out.println("===============================ADMIN PANEL===============================");
-        Scene scene = new Scene(views.get("admin-view"));
-        primaryStage.setScene(scene);
+        scene.setRoot(views.get("admin-view"));
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void registerLoadHandle(MouseEvent mouseEvent) {
+        scene.setRoot(views.get("register-view"));
     }
 }
