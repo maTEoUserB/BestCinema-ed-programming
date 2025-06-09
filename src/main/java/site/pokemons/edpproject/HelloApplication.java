@@ -5,10 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import site.pokemons.edpproject.controller.AdminController;
-import site.pokemons.edpproject.controller.LoginController;
-import site.pokemons.edpproject.controller.RegisterController;
-import site.pokemons.edpproject.controller.RepertoireController;
+import site.pokemons.edpproject.controller.*;
+import site.pokemons.edpproject.model.CinemaHall;
 import site.pokemons.edpproject.service.MovieService;
 import site.pokemons.edpproject.service.ScreeningService;
 import site.pokemons.edpproject.service.TmdbApiService;
@@ -28,6 +26,8 @@ public class HelloApplication extends Application {
 
         //Utworzenie widoków przy starcie
         Map<String, Parent> views = new HashMap<>();
+        //Utworzenie kontrolerów
+        Map<String, Object> controllers = new HashMap<>();
 
         //REPERTOIRE
         FXMLLoader fxmlRepertoireLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/repertoire-view.fxml"));
@@ -46,6 +46,25 @@ public class HelloApplication extends Application {
         });
         Parent repertoireView = fxmlRepertoireLoader.load();
         views.put("repertoire-view", repertoireView);
+
+        //HALL
+        FXMLLoader fxmlHallLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/cinema-hall-view.fxml"));
+        CinemaHallController hallController = new CinemaHallController();
+        fxmlHallLoader.setControllerFactory(type -> {
+            if (type == CinemaHallController.class) {
+                return hallController;
+            } else {
+                try {
+                    return type.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        Parent hallView = fxmlHallLoader.load();
+        views.put("hall-view", hallView);
+        controllers.put("hall-controller", hallController);
 
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
@@ -83,6 +102,24 @@ public class HelloApplication extends Application {
         Parent loginView = fxmlLoginLoader.load();
         views.put("login-view", loginView);
 
+        //USER PROFILE
+        FXMLLoader fxmlProfileLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/user-profile-view.fxml"));
+        UserProfileController profileController = new UserProfileController(userService);
+        fxmlProfileLoader.setControllerFactory(type -> {
+            if (type == UserProfileController.class) {
+                return profileController;
+            } else {
+                try {
+                    return type.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        Parent profileView = fxmlProfileLoader.load();
+        views.put("profile-view", profileView);
+
         //WEJŚCIOWE OKNO REJESTRACJI
         FXMLLoader fxmlRegisterLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
         RegisterController regController = new RegisterController(userService);
@@ -107,6 +144,9 @@ public class HelloApplication extends Application {
         adminController.setViews(views);
         loginController.setViews(views);
         repertoireController.setViews(views);
+        profileController.setViews(views);
+
+        repertoireController.setControllers(controllers);
 
         Scene scene = new Scene(registerView);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
@@ -114,9 +154,8 @@ public class HelloApplication extends Application {
         repertoireController.setScene(scene);
         adminController.setScene(scene);
         loginController.setScene(scene);
-
-//        stage.setMaximized(true);
-//        stage.setResizable(true);
+        profileController.setScene(scene);
+        
         stage.setWidth(900);
         stage.setHeight(570);
         stage.setTitle("BestCinema");

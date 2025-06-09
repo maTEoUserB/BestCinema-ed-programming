@@ -10,6 +10,7 @@
       <HBox prefHeight="46.0" prefWidth="910.0">
          <children>
             <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" text="Wyloguj" />
+            <Button mnemonicParsing="false" onMouseClicked="#goToProfileView" text="Profil" />
          </children>
       </HBox>
       <ListView fx:id="movieList" layoutX="-2.0" layoutY="50.0" prefHeight="520.0" prefWidth="910.0" />

@@ -14,6 +14,7 @@ import site.pokemons.edpproject.service.TmdbApiService;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,15 @@ public class AdminController {
         showLoginPanel();
     }
 
+    public void goToProfileView(MouseEvent mouseEvent) {
+        showUserProfilePanel();
+    }
+
     private void showLoginPanel() {
         scene.setRoot(views.get("login-view"));
+    }
+
+    private void showUserProfilePanel() {
+        scene.setRoot(views.get("profile-view"));
     }
 }

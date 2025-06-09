@@ -27,6 +27,12 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String surname;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -35,10 +41,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
-    public User(String username, String hashedPassword, String email, LocalDateTime now, String role) {
+    public User(String username, String hashedPassword, String email, String name, String surname, LocalDateTime now, String role) {
         this.username = username;
         this.passwordHash = hashedPassword;
         this.email = email;
+        this.name = name;
+        this.surname = surname;
         this.createdAt = now;
         this.role = role;
     }

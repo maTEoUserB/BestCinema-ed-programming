@@ -19,6 +19,8 @@ public class RepertoireController {
     private Scene scene;
     @Setter
     private Map<String, Parent> views;
+    @Setter
+    private Map<String, Object> controllers;
     private final ScreeningService screeningService;
 
     @FXML private DatePicker datePicker;
@@ -32,7 +34,7 @@ public class RepertoireController {
         List<ScreeningDTO> screenings = screeningService.findScreenings(datePicker.getValue());
         repertoireList.getItems().setAll(screenings);
 
-        repertoireList.setCellFactory(listCell -> new RepertoireListCell(screeningService));
+        repertoireList.setCellFactory(listCell -> new RepertoireListCell(screeningService, scene, views, controllers));
     }
 
     public void logoutButtonClick(MouseEvent mouseEvent) {
@@ -40,7 +42,15 @@ public class RepertoireController {
         showLoginPanel();
     }
 
+    public void goToProfileView(MouseEvent mouseEvent) {
+        showUserProfilePanel();
+    }
+
     private void showLoginPanel() {
         scene.setRoot(views.get("login-view"));
+    }
+
+    private void showUserProfilePanel() {
+        scene.setRoot(views.get("profile-view"));
     }
 }
