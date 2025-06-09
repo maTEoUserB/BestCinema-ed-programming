@@ -9,9 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Setter;
+import site.pokemons.edpproject.model.Reservation;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.service.EmailService;
+import site.pokemons.edpproject.service.ReservationService;
 import site.pokemons.edpproject.service.ScreeningService;
+import site.pokemons.edpproject.service.serviceSingleton.ReservationServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.util.Map;
@@ -70,6 +73,7 @@ public class RepertoireListCellController {
 
             CinemaHallController controller = (CinemaHallController) controllers.get("hall-controller");
             controller.setHallNumber(screening.getHallId());
+
             showHallPanel();
         });
 

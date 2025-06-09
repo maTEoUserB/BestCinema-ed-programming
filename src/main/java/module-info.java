@@ -24,6 +24,7 @@ module site.pokemons.edpproject {
 
     exports site.pokemons.edpproject.model.tmdbApiDto to com.fasterxml.jackson.databind;
     exports site.pokemons.edpproject.model.dbDto;
+    exports site.pokemons.edpproject.model;
     exports site.pokemons.edpproject.model.db;
     opens site.pokemons.edpproject.model.db to javafx.fxml;
 }
