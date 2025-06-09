@@ -25,6 +25,12 @@ public class RegisterController {
     @FXML
     private TextField passwdText;
     @FXML
+    private TextField emailText;
+    @FXML
+    private TextField nameText;
+    @FXML
+    private TextField surnameText;
+    @FXML
     private TextField cfPasswdText;
     @FXML
     private CheckBox agreeCheck;
@@ -50,7 +56,7 @@ public class RegisterController {
             return;
         }
 
-        boolean reg = userService.registerUser(usernameText.getText(), passwdText.getText());
+        boolean reg = userService.registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
         if (reg) {
             infoLabel.setText("Pomyślnie zarejestrowano.");
             showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);
@@ -73,6 +79,9 @@ public class RegisterController {
     private void clearRegisterPage() {
         usernameText.clear();
         passwdText.clear();
+        emailText.clear();
+        nameText.clear();
+        surnameText.clear();
         cfPasswdText.clear();
         agreeCheck.setSelected(false);
         infoLabel.setText("");

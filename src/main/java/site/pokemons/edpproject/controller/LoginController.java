@@ -34,8 +34,7 @@ public class LoginController {
         clearLoginPage();
 
         if(log){
-            infoLabel.setText("Pomyslnie zalogowano.");
-            showAlert("Pomyślnie zalogowano.", Alert.AlertType.INFORMATION);
+            infoLabel.setText("Pomyślnie zalogowano.");
 
             if(userService.getAccountById(SessionContext.getLoggedInUserId()).getRole().equals("USER")){
                 showUserPanel();
@@ -46,8 +45,8 @@ public class LoginController {
             return;
         }
 
-        infoLabel.setText("Błdne dane logowania.");
-        showAlert("Błdne dane logowania.", Alert.AlertType.ERROR);
+        infoLabel.setText("Błędne dane logowania.");
+        showAlert("Błędne dane logowania.", Alert.AlertType.ERROR);
     }
 
     private void clearLoginPage() {
@@ -64,14 +63,14 @@ public class LoginController {
         scene.setRoot(views.get("admin-view"));
     }
 
+    public void registerLoadHandle(MouseEvent mouseEvent) {
+        scene.setRoot(views.get("register-view"));
+    }
+
     private void showAlert(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void registerLoadHandle(MouseEvent mouseEvent) {
-        scene.setRoot(views.get("register-view"));
     }
 }

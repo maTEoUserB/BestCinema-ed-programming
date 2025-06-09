@@ -72,6 +72,14 @@ Label {
     -fx-background-color: #5e20c6;
 }
 
+.seat-button {
+    -fx-background-color: green;
+}
+
+.seat-button:hover {
+    -fx-background-color: #e46060;
+}
+
 /* ListView - usuń domyślne obramowanie, ciemne tło */
 .list-view {
     -fx-background-color: #1e1e1e;
