@@ -23,6 +23,7 @@ public class UserService {
 
             if (BCrypt.checkpw(password, user.getPasswordHash())) {
                 SessionContext.setLoggedInUserId(user.getUserId());
+                SessionContext.setLoggedInUserEmail(user.getEmail());
                 return true;
             }
 
@@ -52,6 +53,7 @@ public class UserService {
             em.persist(user);
 
             SessionContext.setLoggedInUserId(user.getUserId());
+            SessionContext.setLoggedInUserEmail(user.getEmail());
             return true;
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();

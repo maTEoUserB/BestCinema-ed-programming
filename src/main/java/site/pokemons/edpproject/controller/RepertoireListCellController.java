@@ -66,17 +66,26 @@ public class RepertoireListCellController {
                 }
             }).start();
 
-            CinemaHallController controller = (CinemaHallController) controllers.get("hall-controller");
-            controller.setHallNumber(screening.getHallId());
+            ReservationController controller = (ReservationController) controllers.get("reservation-controller");
+            controller.setHallId(screening.getHallId());
 
-            showHallPanel();
+            showReservationPanel();
+
+//            CinemaHallController controller = (CinemaHallController) controllers.get("hall-controller");
+//            controller.setHallNumber(screening.getHallId());
+
+//            showHallPanel();
         });
 
     }
 
-    private void showHallPanel() {
-        scene.setRoot(views.get("hall-view"));
+    private void showReservationPanel() {
+        scene.setRoot(views.get("reservation-view"));
     }
+
+//    private void showHallPanel() {
+//        scene.setRoot(views.get("hall-view"));
+//    }
 
     private void showAlert(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);

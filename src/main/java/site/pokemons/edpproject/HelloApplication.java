@@ -61,6 +61,25 @@ public class HelloApplication extends Application {
         views.put("hall-view", hallView);
         controllers.put("hall-controller", hallController);
 
+        //HALL
+        FXMLLoader fxmlReservationLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/reservation-view.fxml"));
+        ReservationController reservationController = new ReservationController();
+        fxmlReservationLoader.setControllerFactory(type -> {
+            if (type == ReservationController.class) {
+                return reservationController;
+            } else {
+                try {
+                    return type.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        Parent reservationView = fxmlReservationLoader.load();
+        views.put("reservation-view", reservationView);
+        controllers.put("reservation-controller", reservationController);
+
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
         AdminController adminController =  new AdminController();
@@ -140,6 +159,7 @@ public class HelloApplication extends Application {
         loginController.setViews(views);
         repertoireController.setViews(views);
         profileController.setViews(views);
+        reservationController.setViews(views);
 
         repertoireController.setControllers(controllers);
 
@@ -150,6 +170,7 @@ public class HelloApplication extends Application {
         adminController.setScene(scene);
         loginController.setScene(scene);
         profileController.setScene(scene);
+        reservationController.setScene(scene);
         
         stage.setWidth(900);
         stage.setHeight(570);
