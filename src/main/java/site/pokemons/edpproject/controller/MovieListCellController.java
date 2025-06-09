@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import lombok.Setter;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.service.ScreeningService;
+import site.pokemons.edpproject.service.serviceSingleton.ScreeningServiceSingleton;
 
 import java.time.LocalDate;
 
@@ -17,9 +18,6 @@ public class MovieListCellController {
     @FXML private Spinner<Integer> hourSpinner;
     @FXML private Spinner<Integer> minuteSpinner;
     @FXML private Button saveButton;
-
-    @Setter
-    private ScreeningService screeningService;
 
     @FXML
     public void initialize() {
@@ -51,7 +49,7 @@ public class MovieListCellController {
                 int hallId = Integer.parseInt(hall);
 
                 // zapisz do bazy
-                screeningService.saveScreening(movie, price, hallId, date, hour, minute);
+                ScreeningServiceSingleton.getInstance().saveScreening(movie, price, hallId, date, hour, minute);
 
                 priceField.clear();
                 hallField.clear();

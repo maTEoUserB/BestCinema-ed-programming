@@ -11,6 +11,7 @@ import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
 import site.pokemons.edpproject.service.ScreeningService;
 import site.pokemons.edpproject.service.TmdbApiService;
+import site.pokemons.edpproject.service.serviceSingleton.TmdbApiServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
@@ -27,21 +28,15 @@ public class AdminController {
     private Scene scene;
     @Setter
     private Map<String, Parent> views;
-    private final TmdbApiService tmdbApiService;
-    private final ScreeningService screeningService;
 
-    public AdminController(TmdbApiService tmdbApiService, ScreeningService screeningService) {
-        this.tmdbApiService = tmdbApiService;
-        this.screeningService = screeningService;
-    }
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        NowPlayingResponse response = tmdbApiService.getMovieList();
+        NowPlayingResponse response = TmdbApiServiceSingleton.getInstance().getMovieList();
         List<MovieDTO> movies = response.getResults();
         movieList.getItems().setAll(movies);
 
-        movieList.setCellFactory(listCell -> new MovieListCell(screeningService));
+        movieList.setCellFactory(listCell -> new MovieListCell());
 
     }
 

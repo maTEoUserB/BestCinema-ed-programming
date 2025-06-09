@@ -7,14 +7,8 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailService {
-
-    private final String fromEmail;
-    private final String password;
-
-    public EmailService(String fromEmail, String password) {
-        this.fromEmail = fromEmail;
-        this.password = password;
-    }
+    private final String fromEmail = System.getenv("MY_EMAIL");
+    private final String password = System.getenv("MY_EMAIL_PASS");
 
     public void sendEmail(String toEmail, String subject, String body) throws MessagingException {
         Properties props = new Properties();

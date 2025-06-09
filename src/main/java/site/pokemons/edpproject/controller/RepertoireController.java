@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
-import site.pokemons.edpproject.service.ScreeningService;
+import site.pokemons.edpproject.service.serviceSingleton.ScreeningServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.util.List;
@@ -21,20 +21,16 @@ public class RepertoireController {
     private Map<String, Parent> views;
     @Setter
     private Map<String, Object> controllers;
-    private final ScreeningService screeningService;
 
     @FXML private DatePicker datePicker;
     @FXML private ListView<ScreeningDTO> repertoireList;
 
-    public RepertoireController(ScreeningService screeningService) {
-        this.screeningService = screeningService;
-    }
 
     public void loadRepertoire(MouseEvent mouseEvent) {
-        List<ScreeningDTO> screenings = screeningService.findScreenings(datePicker.getValue());
+        List<ScreeningDTO> screenings = ScreeningServiceSingleton.getInstance().findScreenings(datePicker.getValue());
         repertoireList.getItems().setAll(screenings);
 
-        repertoireList.setCellFactory(listCell -> new RepertoireListCell(screeningService, scene, views, controllers));
+        repertoireList.setCellFactory(listCell -> new RepertoireListCell(scene, views, controllers));
     }
 
     public void logoutButtonClick(MouseEvent mouseEvent) {

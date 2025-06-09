@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.CinemaHallController">
+<AnchorPane fx:id="rootPane" prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.CinemaHallController">
    <children>
       <Button fx:id="seat8_1" layoutX="82.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" />
       <Button fx:id="seat8_2" layoutX="120.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" />
@@ -177,6 +177,6 @@
          </font>
       </Label>
       <Button layoutX="782.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#toNextStep" text="Dalej" />
-      <Button layoutX="707.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Wróć" />
+      <Button layoutX="694.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Przerwij" />
    </children>
 </AnchorPane>

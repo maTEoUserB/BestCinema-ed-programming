@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
+import site.pokemons.edpproject.service.serviceSingleton.UserServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.util.Map;
@@ -16,7 +17,6 @@ import java.util.Map;
 public class LoginController {
     @Setter
     private Scene scene;
-    private final UserService userService;
     @Setter
     private Map<String, Parent> views;
 
@@ -24,12 +24,9 @@ public class LoginController {
     @FXML private TextField passwdText;
     @FXML private Label infoLabel;
 
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
-
     @FXML
     public void loginHandle(MouseEvent mouseEvent) {
+        UserService userService = UserServiceSingleton.getInstance();
         boolean log = userService.loginUser(usernameText.getText(), passwdText.getText());
         clearLoginPage();
 

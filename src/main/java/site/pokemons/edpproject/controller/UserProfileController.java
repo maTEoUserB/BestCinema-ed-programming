@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
+import site.pokemons.edpproject.service.serviceSingleton.UserServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.util.Map;
@@ -17,7 +18,6 @@ public class UserProfileController {
     private Scene scene;
     @Setter
     private Map<String, Parent> views;
-    private final UserService userService;
 
     @FXML private TextField emailField;
     @FXML private TextField usernameField;
@@ -27,9 +27,6 @@ public class UserProfileController {
     @FXML private TextField newPasswordField;
     @FXML private TextField secondPasswordField;
 
-    public UserProfileController(UserService userService) {
-        this.userService = userService;
-    }
 
     public void backToRepertoire(MouseEvent mouseEvent) {
         scene.setRoot(views.get("repertoire-view"));
@@ -41,7 +38,7 @@ public class UserProfileController {
     }
 
     public void changeInformation(MouseEvent mouseEvent) {
-        userService.changeProfileInformation(emailField.getText(), usernameField.getText(), nameField.getText(), surnameField.getText());
+        UserServiceSingleton.getInstance().changeProfileInformation(emailField.getText(), usernameField.getText(), nameField.getText(), surnameField.getText());
         showAlert("Zmieniono dane.", Alert.AlertType.INFORMATION);
         clearInformationFields();
     }
@@ -49,7 +46,7 @@ public class UserProfileController {
 
     public void changePassword(MouseEvent mouseEvent) {
         try {
-            userService.changePassword(passwordField.getText(), newPasswordField.getText(), secondPasswordField.getText());
+            UserServiceSingleton.getInstance().changePassword(passwordField.getText(), newPasswordField.getText(), secondPasswordField.getText());
             showAlert("Zmieniono hasło.", Alert.AlertType.INFORMATION);
             clearPasswordFields();
         } catch (IllegalArgumentException e) {

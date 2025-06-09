@@ -19,11 +19,6 @@ import java.util.Map;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
-        UserService userService = new UserService();
-        MovieService movieService = new MovieService();
-        ScreeningService screeningService = new ScreeningService(movieService);
-        TmdbApiService tmdbApiService = new TmdbApiService();
-
         //Utworzenie widoków przy starcie
         Map<String, Parent> views = new HashMap<>();
         //Utworzenie kontrolerów
@@ -31,7 +26,7 @@ public class HelloApplication extends Application {
 
         //REPERTOIRE
         FXMLLoader fxmlRepertoireLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/repertoire-view.fxml"));
-        RepertoireController repertoireController = new RepertoireController(screeningService);
+        RepertoireController repertoireController = new RepertoireController();
         fxmlRepertoireLoader.setControllerFactory(type -> {
             if (type == RepertoireController.class) {
                 return repertoireController;
@@ -68,7 +63,7 @@ public class HelloApplication extends Application {
 
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
-        AdminController adminController =  new AdminController(tmdbApiService, screeningService);
+        AdminController adminController =  new AdminController();
         fxmlAdminLoader.setControllerFactory(type -> {
             if (type == AdminController.class) {
                 return adminController;
@@ -86,7 +81,7 @@ public class HelloApplication extends Application {
 
         //LOGIN
         FXMLLoader fxmlLoginLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/login-view.fxml"));
-        LoginController loginController = new LoginController(userService);
+        LoginController loginController = new LoginController();
         fxmlLoginLoader.setControllerFactory(type -> {
             if (type == LoginController.class) {
                 return loginController;
@@ -104,7 +99,7 @@ public class HelloApplication extends Application {
 
         //USER PROFILE
         FXMLLoader fxmlProfileLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/user-profile-view.fxml"));
-        UserProfileController profileController = new UserProfileController(userService);
+        UserProfileController profileController = new UserProfileController();
         fxmlProfileLoader.setControllerFactory(type -> {
             if (type == UserProfileController.class) {
                 return profileController;
@@ -122,7 +117,7 @@ public class HelloApplication extends Application {
 
         //WEJŚCIOWE OKNO REJESTRACJI
         FXMLLoader fxmlRegisterLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
-        RegisterController regController = new RegisterController(userService);
+        RegisterController regController = new RegisterController();
         fxmlRegisterLoader.setControllerFactory(type -> {
                 if(type == RegisterController.class){
                     return regController;

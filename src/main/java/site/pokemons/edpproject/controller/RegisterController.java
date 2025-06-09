@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
+import site.pokemons.edpproject.service.serviceSingleton.UserServiceSingleton;
 
 import java.util.Map;
 
 public class RegisterController {
     @Setter
     private Scene scene;
-    private final UserService userService;
     @Setter
     private Map<String, Parent> views;
 
@@ -37,10 +37,6 @@ public class RegisterController {
     @FXML
     private Label infoLabel;
 
-    public RegisterController(UserService userService) {
-        this.userService = userService;
-    }
-
     @FXML
     public void registerHandle(MouseEvent mouseEvent) {
 
@@ -56,7 +52,7 @@ public class RegisterController {
             return;
         }
 
-        boolean reg = userService.registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
+        boolean reg = UserServiceSingleton.getInstance().registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
         if (reg) {
             infoLabel.setText("Pomyślnie zarejestrowano.");
             showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);

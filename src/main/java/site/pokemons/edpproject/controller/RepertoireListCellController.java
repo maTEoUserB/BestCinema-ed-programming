@@ -14,6 +14,7 @@ import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.service.EmailService;
 import site.pokemons.edpproject.service.ReservationService;
 import site.pokemons.edpproject.service.ScreeningService;
+import site.pokemons.edpproject.service.serviceSingleton.EmailServiceSingleton;
 import site.pokemons.edpproject.service.serviceSingleton.ReservationServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
@@ -32,8 +33,6 @@ public class RepertoireListCellController {
     @FXML
     private Button bookSeatsButton;
 
-    @Setter
-    private ScreeningService screeningService;
     @Setter
     private Scene scene;
     @Setter
@@ -56,11 +55,7 @@ public class RepertoireListCellController {
 
             new Thread(() -> {
                 try {
-                    EmailService emailService = new EmailService(
-                            System.getenv("MY_EMAIL"),
-                            System.getenv("MY_EMAIL_PASS")
-                    );
-                    emailService.sendEmail(toEmail, subject, body);
+                    EmailServiceSingleton.getInstance().sendEmail(toEmail, subject, body);
                     Platform.runLater(() -> {
                         showAlert("Wysłano rezerwację na maila.", Alert.AlertType.INFORMATION);
                     });

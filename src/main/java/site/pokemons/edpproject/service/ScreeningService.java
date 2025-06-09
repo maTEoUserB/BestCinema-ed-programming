@@ -9,6 +9,7 @@ import site.pokemons.edpproject.model.Screening;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
+import site.pokemons.edpproject.service.serviceSingleton.MovieServiceSingleton;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,14 +18,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScreeningService {
-    private final MovieService movieService;
-
-    public ScreeningService(MovieService movieService) {
-        this.movieService = movieService;
-    }
+    public ScreeningService() {}
 
     public Screening saveScreening(MovieDTO movie, double price, int hallId, LocalDate date, int hour, int minute) {
-        long movieId = movieService.saveMovie(movie);
+        long movieId = MovieServiceSingleton.getInstance().saveMovie(movie);
 
         EntityManager em = JpaPersistenceUnit.getEntityManager();
         EntityTransaction tx = em.getTransaction();

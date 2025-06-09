@@ -12,11 +12,6 @@ public class MovieListCell extends ListCell<MovieDTO> {
     private FXMLLoader loader;
     private HBox root;
     private MovieListCellController controller;
-    private ScreeningService screeningService;
-
-    public MovieListCell(ScreeningService screeningService) {
-        this.screeningService = screeningService;
-    }
 
     @Override
     protected void updateItem(MovieDTO movie, boolean empty) {
@@ -37,7 +32,6 @@ public class MovieListCell extends ListCell<MovieDTO> {
             }
 
 
-            controller.setScreeningService(screeningService);
             controller.setData(movie);
             setText(null);
             setGraphic(root);

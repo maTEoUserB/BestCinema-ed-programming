@@ -51,6 +51,7 @@ public class UserService {
             User user = new User(username, hashedPassword, email, name, surname, LocalDateTime.now(), "USER");
             em.persist(user);
 
+            SessionContext.setLoggedInUserId(user.getUserId());
             return true;
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
