@@ -1,6 +1,6 @@
 package site.pokemons.edpproject.service.serviceSingleton;
 
-import site.pokemons.edpproject.service.TmdbApiService;
+import site.pokemons.edpproject.service.webApi.TmdbApiService;
 
 import java.io.IOException;
 

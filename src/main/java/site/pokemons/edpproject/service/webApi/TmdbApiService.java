@@ -1,8 +1,7 @@
-package site.pokemons.edpproject.service;
+package site.pokemons.edpproject.service.webApi;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
 
 import java.io.IOException;

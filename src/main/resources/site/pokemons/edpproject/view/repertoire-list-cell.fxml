@@ -16,6 +16,11 @@
             <ImageView fx:id="image" fitHeight="120.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
-      <Button fx:id="bookSeatsButton" mnemonicParsing="false" text="Zarezerwuj miejsca" />
+      <VBox prefHeight="178.0" prefWidth="150.0">
+         <children>
+            <Button fx:id="bookSeatsButton" mnemonicParsing="false" text="Zarezerwuj miejsca" />
+            <Button fx:id="trailerButton" mnemonicParsing="false" onMouseClicked="#showTrailer" text="Sprawdź trailer" />
+         </children>
+      </VBox>
    </children>
 </HBox>

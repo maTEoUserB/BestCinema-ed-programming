@@ -7,21 +7,22 @@ import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SeatService {
     public List<String> getOccupiedSeats(Long hallId){
-        EntityManager em = JpaPersistenceUnit.getEntityManager();
+//        EntityManager em = JpaPersistenceUnit.getEntityManager();
+//
+//        CinemaHall hall = em.find(CinemaHall.class, hallId);
+//        List<Seat> seats = em.createQuery("" +
+//                        "SELECT s FROM Seat s " +
+//                        "WHERE s.hall = :hall " +
+//                        "AND s.occupied = true"
+//                        , Seat.class
+//                ).setParameter("hall",hall)
+//                .getResultStream().toList();
 
-        CinemaHall hall = em.find(CinemaHall.class, hallId);
-        List<Seat> seats = em.createQuery("" +
-                        "SELECT s FROM Seat s " +
-                        "WHERE s.hall = :hall " +
-                        "AND s.occupied = true"
-                        , Seat.class
-                ).setParameter("hall",hall)
-                .getResultStream().toList();
+//        return seats.stream().map(Seat::getSeatNumber).toList();
 
-        return seats.stream().map(Seat::getSeatNumber).toList();
+        return new ArrayList<>();
     }
 }

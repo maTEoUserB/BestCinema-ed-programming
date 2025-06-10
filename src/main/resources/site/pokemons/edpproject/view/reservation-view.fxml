@@ -7,12 +7,13 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.ReservationController">
    <children>
-      <VBox layoutX="249.0" layoutY="108.0" prefHeight="410.0" prefWidth="411.0" />
+      <VBox fx:id="personList" layoutX="249.0" layoutY="108.0" prefHeight="353.0" prefWidth="411.0" />
       <HBox prefHeight="100.0" prefWidth="910.0">
          <children>
             <Button mnemonicParsing="false" onMouseClicked="#stopBookButton" text="Przerwij" />
             <Button mnemonicParsing="false" onMouseClicked="#goToHallView" text="Dalej" />
          </children>
       </HBox>
+      <Button layoutX="249.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#addPerson" text="Dodaj osobę" />
    </children>
 </AnchorPane>

@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import org.mindrot.jbcrypt.BCrypt;
+import site.pokemons.edpproject.model.CinemaHall;
+import site.pokemons.edpproject.model.Seat;
 import site.pokemons.edpproject.model.User;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 import site.pokemons.edpproject.session.SessionContext;
@@ -94,10 +96,10 @@ public class UserService {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if(!email.isEmpty()) user.setEmail(email);
-            if(!username.isEmpty()) user.setUsername(username);
-            if(!name.isEmpty()) user.setName(name);
-            if(!email.isEmpty()) user.setSurname(surname);
+            if (!email.isEmpty()) user.setEmail(email);
+            if (!username.isEmpty()) user.setUsername(username);
+            if (!name.isEmpty()) user.setName(name);
+            if (!email.isEmpty()) user.setSurname(surname);
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             e.printStackTrace();

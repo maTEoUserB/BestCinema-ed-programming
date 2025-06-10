@@ -21,7 +21,9 @@ public class Seat {
     @JoinColumn(name = "hall_id", nullable = false)
     private CinemaHall hall;
 
-    @Column(nullable = true)
-    private boolean occupied;
+    public Seat(String seatNumber, CinemaHall hall) {
+        this.seatNumber = seatNumber;
+        this.hall = hall;
+    }
 }
 

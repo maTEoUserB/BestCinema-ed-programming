@@ -6,11 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import site.pokemons.edpproject.controller.*;
-import site.pokemons.edpproject.model.CinemaHall;
-import site.pokemons.edpproject.service.MovieService;
-import site.pokemons.edpproject.service.ScreeningService;
-import site.pokemons.edpproject.service.TmdbApiService;
-import site.pokemons.edpproject.service.UserService;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -173,12 +168,13 @@ public class HelloApplication extends Application {
         reservationController.setScene(scene);
         
         stage.setWidth(900);
-        stage.setHeight(570);
+        stage.setHeight(700);
         stage.setTitle("BestCinema");
         stage.setScene(scene);
         stage.show();
     }
 
+    //AIzaSyD64Spkj4Fcmm310IQiKMUslHrr-_BRo34
     public static void main(String[] args) {
         launch();
     }

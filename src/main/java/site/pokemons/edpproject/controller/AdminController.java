@@ -9,13 +9,10 @@ import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
-import site.pokemons.edpproject.service.ScreeningService;
-import site.pokemons.edpproject.service.TmdbApiService;
 import site.pokemons.edpproject.service.serviceSingleton.TmdbApiServiceSingleton;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
