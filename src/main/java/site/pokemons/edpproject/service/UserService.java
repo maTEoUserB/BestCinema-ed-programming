@@ -5,8 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import org.mindrot.jbcrypt.BCrypt;
-import site.pokemons.edpproject.model.CinemaHall;
-import site.pokemons.edpproject.model.Seat;
 import site.pokemons.edpproject.model.User;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 import site.pokemons.edpproject.session.SessionContext;
@@ -14,6 +12,16 @@ import site.pokemons.edpproject.session.SessionContext;
 import java.time.LocalDateTime;
 
 public class UserService {
+    private static UserService instance;
+
+    private UserService() {}
+
+    public static synchronized UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
+    }
 
     public boolean loginUser(String username, String password) {
         EntityManager em = JpaPersistenceUnit.getEntityManager();
@@ -26,6 +34,7 @@ public class UserService {
             if (BCrypt.checkpw(password, user.getPasswordHash())) {
                 SessionContext.setLoggedInUserId(user.getUserId());
                 SessionContext.setLoggedInUserEmail(user.getEmail());
+                SessionContext.setLoggedInUserRole(user.getRole());
                 return true;
             }
 
@@ -56,12 +65,13 @@ public class UserService {
 
             SessionContext.setLoggedInUserId(user.getUserId());
             SessionContext.setLoggedInUserEmail(user.getEmail());
+            SessionContext.setLoggedInUserRole(user.getRole());
+            tx.commit();
             return true;
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             e.printStackTrace();
         } finally {
-            if (tx.isActive()) tx.commit();
             em.close();
         }
         return false;
@@ -75,12 +85,12 @@ public class UserService {
             tx.begin();
             User user = em.find(User.class, id);
             if (user == null) throw new EntityNotFoundException("Account with id " + id + " not found");
+            tx.commit();
             return user;
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             e.printStackTrace();
         } finally {
-            if (tx.isActive()) tx.commit();
             em.close();
         }
         return null;
@@ -100,19 +110,16 @@ public class UserService {
             if (!username.isEmpty()) user.setUsername(username);
             if (!name.isEmpty()) user.setName(name);
             if (!email.isEmpty()) user.setSurname(surname);
+            tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             e.printStackTrace();
         } finally {
-            if (tx.isActive()) tx.commit();
             em.close();
         }
     }
 
     public void changePassword(String password, String newPassword, String newPasswordSecond) {
-        if (!newPassword.equals(newPasswordSecond)) {
-            throw new IllegalArgumentException("Passwords do not match");
-        }
         EntityManager em = JpaPersistenceUnit.getEntityManager();
 
         long userId = SessionContext.getLoggedInUserId();
@@ -120,18 +127,18 @@ public class UserService {
                 .setParameter("userId", userId).getSingleResult();
 
         if (!BCrypt.checkpw(password, user.getPasswordHash())) {
-            throw new IllegalArgumentException("Actual password is wrong.");
+            throw new IllegalArgumentException("Aktualne hasło jest błędne.");
         }
 
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
             user.setPasswordHash(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+            tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
             e.printStackTrace();
         } finally {
-            if (tx.isActive()) tx.commit();
             em.close();
         }
     }

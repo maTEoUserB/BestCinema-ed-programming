@@ -9,6 +9,17 @@ import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 
 
 public class MovieService {
+    private static MovieService instance;
+
+    private MovieService(){}
+
+    public static synchronized MovieService getInstance() {
+        if (instance == null) {
+            instance = new MovieService();
+        }
+        return instance;
+    }
+
     public long saveMovie(MovieDTO movieDTO) {
         EntityManager em = JpaPersistenceUnit.getEntityManager();
 
@@ -20,18 +31,18 @@ public class MovieService {
         try{
             tx.begin();
 
-            String imageUrl = "https://image.tmdb.org/t/p/w200" + movieDTO.getPosterPath();
+            String imageUrl = "https://image.tmdb.org/t/p/w400" + movieDTO.getPosterPath();
             Movie newMovie = new Movie(movieDTO.getTitle(), movieDTO.getOverview(), imageUrl, movieDTO.getId());
             em.persist(newMovie);
 
             showAlert("Film zapisano do bazy!", Alert.AlertType.INFORMATION);
+            tx.commit();
             return newMovie.getMovieId();
         } catch (Exception e){
             if(tx.isActive()) tx.rollback();
             e.printStackTrace();
             showAlert("Nie udało się zapisać filmu w bazie.", Alert.AlertType.ERROR);
         } finally {
-            if(tx.isActive()) tx.commit();
             em.close();
         }
         return 0;

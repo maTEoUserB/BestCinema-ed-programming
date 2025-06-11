@@ -15,7 +15,16 @@ import java.nio.charset.StandardCharsets;
 import org.json.JSONObject;
 
 public class YouTubeApiService {
-    public YouTubeApiService() {
+    private static YouTubeApiService instance;
+
+    private YouTubeApiService() {
+    }
+
+    public static YouTubeApiService getInstance() {
+        if (instance == null) {
+            instance = new YouTubeApiService();
+        }
+        return instance;
     }
 
     public String getMovieTrailerLink(String title) throws IOException, InterruptedException {
@@ -23,11 +32,15 @@ public class YouTubeApiService {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + encodedTitle + "trailer&type=video&key=AIzaSyD64Spkj4Fcmm310IQiKMUslHrr-_BRo34"))
+                .uri(URI.create("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + encodedTitle + "trailer&type=video&key=" + System.getenv("YT_API_KEY")))
                 .build();
 
         HttpResponse<String> jsonResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+        return getVideoId(jsonResponse);
+    }
+
+    private String getVideoId(HttpResponse<String> jsonResponse) {
         JSONObject response = new JSONObject(jsonResponse.body());
         JSONArray items = response.getJSONArray("items");
         JSONObject item = items.getJSONObject(0);

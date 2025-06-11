@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
-import site.pokemons.edpproject.service.serviceSingleton.UserServiceSingleton;
+import site.pokemons.edpproject.validator.InputValidator;
 
 import java.util.Map;
 
@@ -39,10 +39,19 @@ public class RegisterController {
 
     @FXML
     public void registerHandle(MouseEvent mouseEvent) {
+        InputValidator inputValidator = InputValidator.getInstance();
+        if (!inputValidator.isValidUsername(usernameText.getText())) {
+            showAlert("Nazwa użytkownika musi zawierać co najmniej 8 znaków, w tym jedną cyfrę.", Alert.AlertType.WARNING);
+            return;
+        }
 
-        if (!agreeCheck.isSelected()) {
-            infoLabel.setText("Zaznacz zgodę.");
-            showAlert("Zaznacz zgodę.", Alert.AlertType.ERROR);
+        if (!inputValidator.isValidEmail(emailText.getText())) {
+            showAlert("Błędny format email.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!inputValidator.isValidPassword(passwdText.getText())) {
+            showAlert("Hasło musi zawierać co najmniej 8 znaków, w tym małą i dużą literę, cyfrę oraz znak specjalny.", Alert.AlertType.WARNING);
             return;
         }
 
@@ -52,7 +61,13 @@ public class RegisterController {
             return;
         }
 
-        boolean reg = UserServiceSingleton.getInstance().registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
+        if (!agreeCheck.isSelected()) {
+            infoLabel.setText("Zaznacz zgodę.");
+            showAlert("Zaznacz zgodę.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        boolean reg = UserService.getInstance().registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
         if (reg) {
             infoLabel.setText("Pomyślnie zarejestrowano.");
             showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);

@@ -6,193 +6,362 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
 
-<AnchorPane fx:id="rootPane" prefHeight="730.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.CinemaHallController">
-   <children>
-      <Button fx:id="seat1_1" layoutX="82.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="1" />
-      <Button fx:id="seat1_2" layoutX="120.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="2" />
-      <Button fx:id="seat1_3" layoutX="158.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="3" />
-      <Button fx:id="seat1_4" layoutX="196.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="4" />
-      <Button fx:id="seat1_5" layoutX="234.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="5" />
-      <Button fx:id="seat1_6" layoutX="272.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="6" />
-      <Button fx:id="seat1_7" layoutX="310.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="7" />
-      <Button fx:id="seat1_8" layoutX="348.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="8" />
-      <Button fx:id="seat1_9" layoutX="386.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="9" />
-      <Button fx:id="seat1_10" layoutX="485.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="10" />
-      <Button fx:id="seat1_11" layoutX="523.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="11" />
-      <Button fx:id="seat1_12" layoutX="561.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="12" />
-      <Button fx:id="seat1_13" layoutX="599.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="13" />
-      <Button fx:id="seat1_14" layoutX="637.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="14" />
-      <Button fx:id="seat1_15" layoutX="675.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="15" />
-      <Button fx:id="seat1_16" layoutX="713.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="16" />
-      <Button fx:id="seat1_17" layoutX="751.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="17" />
-      <Button fx:id="seat1_18" layoutX="789.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="18" />
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="site.pokemons.edpproject.controller.CinemaHallController">
+    <center>
+        <AnchorPane fx:id="rootPane" prefHeight="730.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/22"
+                    xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Button fx:id="seat1_1" layoutX="82.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="1"/>
+                <Button fx:id="seat1_2" layoutX="120.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="2"/>
+                <Button fx:id="seat1_3" layoutX="158.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="3"/>
+                <Button fx:id="seat1_4" layoutX="196.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="4"/>
+                <Button fx:id="seat1_5" layoutX="234.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="5"/>
+                <Button fx:id="seat1_6" layoutX="272.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="6"/>
+                <Button fx:id="seat1_7" layoutX="310.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="7"/>
+                <Button fx:id="seat1_8" layoutX="348.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="8"/>
+                <Button fx:id="seat1_9" layoutX="386.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="9"/>
+                <Button fx:id="seat1_10" layoutX="485.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="10"/>
+                <Button fx:id="seat1_11" layoutX="523.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="11"/>
+                <Button fx:id="seat1_12" layoutX="561.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="12"/>
+                <Button fx:id="seat1_13" layoutX="599.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="13"/>
+                <Button fx:id="seat1_14" layoutX="637.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="14"/>
+                <Button fx:id="seat1_15" layoutX="675.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="15"/>
+                <Button fx:id="seat1_16" layoutX="713.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="16"/>
+                <Button fx:id="seat1_17" layoutX="751.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="17"/>
+                <Button fx:id="seat1_18" layoutX="789.0" layoutY="45.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="18"/>
 
-      <Button fx:id="seat2_1" layoutX="82.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="19" />
-      <Button fx:id="seat2_2" layoutX="120.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="20" />
-      <Button fx:id="seat2_3" layoutX="158.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="21" />
-      <Button fx:id="seat2_4" layoutX="196.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="22" />
-      <Button fx:id="seat2_5" layoutX="234.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="23" />
-      <Button fx:id="seat2_6" layoutX="272.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="24" />
-      <Button fx:id="seat2_7" layoutX="310.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="25" />
-      <Button fx:id="seat2_8" layoutX="348.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="26" />
-      <Button fx:id="seat2_9" layoutX="386.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="27" />
-      <Button fx:id="seat2_10" layoutX="485.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="28" />
-      <Button fx:id="seat2_11" layoutX="523.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="29" />
-      <Button fx:id="seat2_12" layoutX="561.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="30" />
-      <Button fx:id="seat2_13" layoutX="599.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="31" />
-      <Button fx:id="seat2_14" layoutX="637.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="32" />
-      <Button fx:id="seat2_15" layoutX="675.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="33" />
-      <Button fx:id="seat2_16" layoutX="713.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="34" />
-      <Button fx:id="seat2_17" layoutX="751.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="35" />
-      <Button fx:id="seat2_18" layoutX="789.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="36" />
+                <Button fx:id="seat2_1" layoutX="82.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="19"/>
+                <Button fx:id="seat2_2" layoutX="120.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="20"/>
+                <Button fx:id="seat2_3" layoutX="158.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="21"/>
+                <Button fx:id="seat2_4" layoutX="196.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="22"/>
+                <Button fx:id="seat2_5" layoutX="234.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="23"/>
+                <Button fx:id="seat2_6" layoutX="272.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="24"/>
+                <Button fx:id="seat2_7" layoutX="310.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="25"/>
+                <Button fx:id="seat2_8" layoutX="348.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="26"/>
+                <Button fx:id="seat2_9" layoutX="386.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="27"/>
+                <Button fx:id="seat2_10" layoutX="485.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="28"/>
+                <Button fx:id="seat2_11" layoutX="523.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="29"/>
+                <Button fx:id="seat2_12" layoutX="561.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="30"/>
+                <Button fx:id="seat2_13" layoutX="599.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="31"/>
+                <Button fx:id="seat2_14" layoutX="637.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="32"/>
+                <Button fx:id="seat2_15" layoutX="675.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="33"/>
+                <Button fx:id="seat2_16" layoutX="713.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="34"/>
+                <Button fx:id="seat2_17" layoutX="751.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="35"/>
+                <Button fx:id="seat2_18" layoutX="789.0" layoutY="81.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="36"/>
 
-      <!-- Rząd 3 -->
-      <Button fx:id="seat3_1" layoutX="82.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="37" />
-      <Button fx:id="seat3_2" layoutX="120.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="38" />
-      <Button fx:id="seat3_3" layoutX="158.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="39" />
-      <Button fx:id="seat3_4" layoutX="196.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="40" />
-      <Button fx:id="seat3_5" layoutX="234.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="41" />
-      <Button fx:id="seat3_6" layoutX="272.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="42" />
-      <Button fx:id="seat3_7" layoutX="310.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="43" />
-      <Button fx:id="seat3_8" layoutX="348.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="44" />
-      <Button fx:id="seat3_9" layoutX="386.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="45" />
-      <Button fx:id="seat3_10" layoutX="485.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="46" />
-      <Button fx:id="seat3_11" layoutX="523.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="47" />
-      <Button fx:id="seat3_12" layoutX="561.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="48" />
-      <Button fx:id="seat3_13" layoutX="599.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="49" />
-      <Button fx:id="seat3_14" layoutX="637.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="50" />
-      <Button fx:id="seat3_15" layoutX="675.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="51" />
-      <Button fx:id="seat3_16" layoutX="713.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="52" />
-      <Button fx:id="seat3_17" layoutX="751.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="53" />
-      <Button fx:id="seat3_18" layoutX="789.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="54" />
+                <!-- Rząd 3 -->
+                <Button fx:id="seat3_1" layoutX="82.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="37"/>
+                <Button fx:id="seat3_2" layoutX="120.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="38"/>
+                <Button fx:id="seat3_3" layoutX="158.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="39"/>
+                <Button fx:id="seat3_4" layoutX="196.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="40"/>
+                <Button fx:id="seat3_5" layoutX="234.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="41"/>
+                <Button fx:id="seat3_6" layoutX="272.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="42"/>
+                <Button fx:id="seat3_7" layoutX="310.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="43"/>
+                <Button fx:id="seat3_8" layoutX="348.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="44"/>
+                <Button fx:id="seat3_9" layoutX="386.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="45"/>
+                <Button fx:id="seat3_10" layoutX="485.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="46"/>
+                <Button fx:id="seat3_11" layoutX="523.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="47"/>
+                <Button fx:id="seat3_12" layoutX="561.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="48"/>
+                <Button fx:id="seat3_13" layoutX="599.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="49"/>
+                <Button fx:id="seat3_14" layoutX="637.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="50"/>
+                <Button fx:id="seat3_15" layoutX="675.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="51"/>
+                <Button fx:id="seat3_16" layoutX="713.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="52"/>
+                <Button fx:id="seat3_17" layoutX="751.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="53"/>
+                <Button fx:id="seat3_18" layoutX="789.0" layoutY="117.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="54"/>
 
-      <!-- Rząd 4 -->
-      <Button fx:id="seat4_1" layoutX="82.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="55" />
-      <Button fx:id="seat4_2" layoutX="120.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="56" />
-      <Button fx:id="seat4_3" layoutX="158.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="57" />
-      <Button fx:id="seat4_4" layoutX="196.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="58" />
-      <Button fx:id="seat4_5" layoutX="234.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="59" />
-      <Button fx:id="seat4_6" layoutX="272.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="60" />
-      <Button fx:id="seat4_7" layoutX="310.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="61" />
-      <Button fx:id="seat4_8" layoutX="348.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="62" />
-      <Button fx:id="seat4_9" layoutX="386.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="63" />
-      <Button fx:id="seat4_10" layoutX="485.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="64" />
-      <Button fx:id="seat4_11" layoutX="523.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="65" />
-      <Button fx:id="seat4_12" layoutX="561.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="66" />
-      <Button fx:id="seat4_13" layoutX="599.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="67" />
-      <Button fx:id="seat4_14" layoutX="637.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="68" />
-      <Button fx:id="seat4_15" layoutX="675.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="69" />
-      <Button fx:id="seat4_16" layoutX="713.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="70" />
-      <Button fx:id="seat4_17" layoutX="751.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="71" />
-      <Button fx:id="seat4_18" layoutX="789.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="72" />
+                <!-- Rząd 4 -->
+                <Button fx:id="seat4_1" layoutX="82.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="55"/>
+                <Button fx:id="seat4_2" layoutX="120.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="56"/>
+                <Button fx:id="seat4_3" layoutX="158.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="57"/>
+                <Button fx:id="seat4_4" layoutX="196.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="58"/>
+                <Button fx:id="seat4_5" layoutX="234.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="59"/>
+                <Button fx:id="seat4_6" layoutX="272.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="60"/>
+                <Button fx:id="seat4_7" layoutX="310.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="61"/>
+                <Button fx:id="seat4_8" layoutX="348.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="62"/>
+                <Button fx:id="seat4_9" layoutX="386.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="63"/>
+                <Button fx:id="seat4_10" layoutX="485.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="64"/>
+                <Button fx:id="seat4_11" layoutX="523.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="65"/>
+                <Button fx:id="seat4_12" layoutX="561.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="66"/>
+                <Button fx:id="seat4_13" layoutX="599.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="67"/>
+                <Button fx:id="seat4_14" layoutX="637.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="68"/>
+                <Button fx:id="seat4_15" layoutX="675.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="69"/>
+                <Button fx:id="seat4_16" layoutX="713.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="70"/>
+                <Button fx:id="seat4_17" layoutX="751.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="71"/>
+                <Button fx:id="seat4_18" layoutX="789.0" layoutY="153.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="72"/>
 
-      <!-- Rząd 5 -->
-      <Button fx:id="seat5_1" layoutX="82.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="73" />
-      <Button fx:id="seat5_2" layoutX="120.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="74" />
-      <Button fx:id="seat5_3" layoutX="158.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="75" />
-      <Button fx:id="seat5_4" layoutX="196.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="76" />
-      <Button fx:id="seat5_5" layoutX="234.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="77" />
-      <Button fx:id="seat5_6" layoutX="272.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="78" />
-      <Button fx:id="seat5_7" layoutX="310.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="79" />
-      <Button fx:id="seat5_8" layoutX="348.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="80" />
-      <Button fx:id="seat5_9" layoutX="386.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="81" />
-      <Button fx:id="seat5_10" layoutX="485.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="82" />
-      <Button fx:id="seat5_11" layoutX="523.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="83" />
-      <Button fx:id="seat5_12" layoutX="561.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="84" />
-      <Button fx:id="seat5_13" layoutX="599.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="85" />
-      <Button fx:id="seat5_14" layoutX="637.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="86" />
-      <Button fx:id="seat5_15" layoutX="675.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="87" />
-      <Button fx:id="seat5_16" layoutX="713.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="88" />
-      <Button fx:id="seat5_17" layoutX="751.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="89" />
-      <Button fx:id="seat5_18" layoutX="789.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="90" />
+                <!-- Rząd 5 -->
+                <Button fx:id="seat5_1" layoutX="82.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="73"/>
+                <Button fx:id="seat5_2" layoutX="120.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="74"/>
+                <Button fx:id="seat5_3" layoutX="158.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="75"/>
+                <Button fx:id="seat5_4" layoutX="196.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="76"/>
+                <Button fx:id="seat5_5" layoutX="234.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="77"/>
+                <Button fx:id="seat5_6" layoutX="272.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="78"/>
+                <Button fx:id="seat5_7" layoutX="310.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="79"/>
+                <Button fx:id="seat5_8" layoutX="348.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="80"/>
+                <Button fx:id="seat5_9" layoutX="386.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="81"/>
+                <Button fx:id="seat5_10" layoutX="485.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="82"/>
+                <Button fx:id="seat5_11" layoutX="523.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="83"/>
+                <Button fx:id="seat5_12" layoutX="561.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="84"/>
+                <Button fx:id="seat5_13" layoutX="599.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="85"/>
+                <Button fx:id="seat5_14" layoutX="637.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="86"/>
+                <Button fx:id="seat5_15" layoutX="675.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="87"/>
+                <Button fx:id="seat5_16" layoutX="713.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="88"/>
+                <Button fx:id="seat5_17" layoutX="751.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="89"/>
+                <Button fx:id="seat5_18" layoutX="789.0" layoutY="189.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="90"/>
 
-      <!-- Rząd 6 -->
-      <Button fx:id="seat6_1" layoutX="82.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="91" />
-      <Button fx:id="seat6_2" layoutX="120.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="92" />
-      <Button fx:id="seat6_3" layoutX="158.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="93" />
-      <Button fx:id="seat6_4" layoutX="196.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="94" />
-      <Button fx:id="seat6_5" layoutX="234.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="95" />
-      <Button fx:id="seat6_6" layoutX="272.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="96" />
-      <Button fx:id="seat6_7" layoutX="310.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="97" />
-      <Button fx:id="seat6_8" layoutX="348.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="98" />
-      <Button fx:id="seat6_9" layoutX="386.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="99" />
-      <Button fx:id="seat6_10" layoutX="485.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="100" />
-      <Button fx:id="seat6_11" layoutX="523.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="101" />
-      <Button fx:id="seat6_12" layoutX="561.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="102" />
-      <Button fx:id="seat6_13" layoutX="599.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="103" />
-      <Button fx:id="seat6_14" layoutX="637.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="104" />
-      <Button fx:id="seat6_15" layoutX="675.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="105" />
-      <Button fx:id="seat6_16" layoutX="713.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="106" />
-      <Button fx:id="seat6_17" layoutX="751.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="107" />
-      <Button fx:id="seat6_18" layoutX="789.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="108" />
+                <!-- Rząd 6 -->
+                <Button fx:id="seat6_1" layoutX="82.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="91"/>
+                <Button fx:id="seat6_2" layoutX="120.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="92"/>
+                <Button fx:id="seat6_3" layoutX="158.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="93"/>
+                <Button fx:id="seat6_4" layoutX="196.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="94"/>
+                <Button fx:id="seat6_5" layoutX="234.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="95"/>
+                <Button fx:id="seat6_6" layoutX="272.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="96"/>
+                <Button fx:id="seat6_7" layoutX="310.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="97"/>
+                <Button fx:id="seat6_8" layoutX="348.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="98"/>
+                <Button fx:id="seat6_9" layoutX="386.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="99"/>
+                <Button fx:id="seat6_10" layoutX="485.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="100"/>
+                <Button fx:id="seat6_11" layoutX="523.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="101"/>
+                <Button fx:id="seat6_12" layoutX="561.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="102"/>
+                <Button fx:id="seat6_13" layoutX="599.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="103"/>
+                <Button fx:id="seat6_14" layoutX="637.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="104"/>
+                <Button fx:id="seat6_15" layoutX="675.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="105"/>
+                <Button fx:id="seat6_16" layoutX="713.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="106"/>
+                <Button fx:id="seat6_17" layoutX="751.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="107"/>
+                <Button fx:id="seat6_18" layoutX="789.0" layoutY="225.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="108"/>
 
-      <!-- Rząd 7 -->
-      <Button fx:id="seat7_1" layoutX="82.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="109" />
-      <Button fx:id="seat7_2" layoutX="120.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="110" />
-      <Button fx:id="seat7_3" layoutX="158.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="111" />
-      <Button fx:id="seat7_4" layoutX="196.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="112" />
-      <Button fx:id="seat7_5" layoutX="234.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="113" />
-      <Button fx:id="seat7_6" layoutX="272.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="114" />
-      <Button fx:id="seat7_7" layoutX="310.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="115" />
-      <Button fx:id="seat7_8" layoutX="348.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="116" />
-      <Button fx:id="seat7_9" layoutX="386.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="117" />
-      <Button fx:id="seat7_10" layoutX="485.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="118" />
-      <Button fx:id="seat7_11" layoutX="523.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="119" />
-      <Button fx:id="seat7_12" layoutX="561.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="120" />
-      <Button fx:id="seat7_13" layoutX="599.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="121" />
-      <Button fx:id="seat7_14" layoutX="637.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="122" />
-      <Button fx:id="seat7_15" layoutX="675.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="123" />
-      <Button fx:id="seat7_16" layoutX="713.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="124" />
-      <Button fx:id="seat7_17" layoutX="751.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="125" />
-      <Button fx:id="seat7_18" layoutX="789.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="126" />
+                <!-- Rząd 7 -->
+                <Button fx:id="seat7_1" layoutX="82.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="109"/>
+                <Button fx:id="seat7_2" layoutX="120.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="110"/>
+                <Button fx:id="seat7_3" layoutX="158.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="111"/>
+                <Button fx:id="seat7_4" layoutX="196.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="112"/>
+                <Button fx:id="seat7_5" layoutX="234.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="113"/>
+                <Button fx:id="seat7_6" layoutX="272.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="114"/>
+                <Button fx:id="seat7_7" layoutX="310.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="115"/>
+                <Button fx:id="seat7_8" layoutX="348.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="116"/>
+                <Button fx:id="seat7_9" layoutX="386.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="117"/>
+                <Button fx:id="seat7_10" layoutX="485.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="118"/>
+                <Button fx:id="seat7_11" layoutX="523.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="119"/>
+                <Button fx:id="seat7_12" layoutX="561.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="120"/>
+                <Button fx:id="seat7_13" layoutX="599.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="121"/>
+                <Button fx:id="seat7_14" layoutX="637.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="122"/>
+                <Button fx:id="seat7_15" layoutX="675.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="123"/>
+                <Button fx:id="seat7_16" layoutX="713.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="124"/>
+                <Button fx:id="seat7_17" layoutX="751.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="125"/>
+                <Button fx:id="seat7_18" layoutX="789.0" layoutY="261.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="126"/>
 
-      <!-- Rząd 8 -->
-      <Button fx:id="seat8_1" layoutX="82.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="1" userData="127" />
-      <Button fx:id="seat8_2" layoutX="120.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="2" userData="128" />
-      <Button fx:id="seat8_3" layoutX="158.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="3" userData="129" />
-      <Button fx:id="seat8_4" layoutX="196.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="4" userData="130" />
-      <Button fx:id="seat8_5" layoutX="234.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="5" userData="131" />
-      <Button fx:id="seat8_6" layoutX="272.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="6" userData="132" />
-      <Button fx:id="seat8_7" layoutX="310.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="7" userData="133" />
-      <Button fx:id="seat8_8" layoutX="348.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="8" userData="134" />
-      <Button fx:id="seat8_9" layoutX="386.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="9" userData="135" />
-      <Button fx:id="seat8_10" layoutX="485.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="10" userData="136" />
-      <Button fx:id="seat8_11" layoutX="523.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="11" userData="137" />
-      <Button fx:id="seat8_12" layoutX="561.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="12" userData="138" />
-      <Button fx:id="seat8_13" layoutX="599.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="13" userData="139" />
-      <Button fx:id="seat8_14" layoutX="637.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="14" userData="140" />
-      <Button fx:id="seat8_15" layoutX="675.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="15" userData="141" />
-      <Button fx:id="seat8_16" layoutX="713.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="16" userData="142" />
-      <Button fx:id="seat8_17" layoutX="751.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="17" userData="143" />
-      <Button fx:id="seat8_18" layoutX="789.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0" prefWidth="38.0" styleClass="seat-button" text="18" userData="144" />
+                <!-- Rząd 8 -->
+                <Button fx:id="seat8_1" layoutX="82.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="1" userData="127"/>
+                <Button fx:id="seat8_2" layoutX="120.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="2" userData="128"/>
+                <Button fx:id="seat8_3" layoutX="158.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="3" userData="129"/>
+                <Button fx:id="seat8_4" layoutX="196.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="4" userData="130"/>
+                <Button fx:id="seat8_5" layoutX="234.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="5" userData="131"/>
+                <Button fx:id="seat8_6" layoutX="272.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="6" userData="132"/>
+                <Button fx:id="seat8_7" layoutX="310.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="7" userData="133"/>
+                <Button fx:id="seat8_8" layoutX="348.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="8" userData="134"/>
+                <Button fx:id="seat8_9" layoutX="386.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="9" userData="135"/>
+                <Button fx:id="seat8_10" layoutX="485.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="10" userData="136"/>
+                <Button fx:id="seat8_11" layoutX="523.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="11" userData="137"/>
+                <Button fx:id="seat8_12" layoutX="561.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="12" userData="138"/>
+                <Button fx:id="seat8_13" layoutX="599.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="13" userData="139"/>
+                <Button fx:id="seat8_14" layoutX="637.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="14" userData="140"/>
+                <Button fx:id="seat8_15" layoutX="675.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="15" userData="141"/>
+                <Button fx:id="seat8_16" layoutX="713.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="16" userData="142"/>
+                <Button fx:id="seat8_17" layoutX="751.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="17" userData="143"/>
+                <Button fx:id="seat8_18" layoutX="789.0" layoutY="297.0" onMouseClicked="#chooseSeat" prefHeight="26.0"
+                        prefWidth="38.0" styleClass="seat-button" text="18" userData="144"/>
 
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a6b6b" height="15.0" layoutX="177.0" layoutY="434.0" stroke="BLACK" strokeType="INSIDE" width="552.0" />
-      <Label layoutX="441.0" layoutY="301.0" text="VIII" textAlignment="CENTER" />
-      <Label layoutX="443.0" layoutY="265.0" text="VII" />
-      <Label layoutX="445.0" layoutY="229.0" text="VI" />
-      <Label layoutX="447.0" layoutY="193.0" text="V" />
-      <Label layoutX="444.0" layoutY="157.0" text="IV" textAlignment="CENTER" />
-      <Label layoutX="446.0" layoutY="121.0" text="III" />
-      <Label layoutX="448.0" layoutY="85.0" text="II" />
-      <Label layoutX="449.0" layoutY="49.0" text="I" textAlignment="CENTER" />
-      <Label layoutX="435.0" layoutY="14.0" text="RZĄD">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="397.0" layoutY="393.0" text="SALA ">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="hallNumber" layoutX="466.0" layoutY="393.0" text="1">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="782.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#toNextStep" text="Dalej" />
-      <Button layoutX="694.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Przerwij" />
-      <VBox fx:id="personList" layoutX="875.0" layoutY="134.0" prefHeight="406.0" prefWidth="376.0" />
-   </children>
-</AnchorPane>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6a6b6b" height="15.0" layoutX="177.0" layoutY="434.0"
+                           stroke="BLACK" strokeType="INSIDE" width="552.0"/>
+                <Label layoutX="441.0" layoutY="301.0" text="VIII" textAlignment="CENTER"/>
+                <Label layoutX="443.0" layoutY="265.0" text="VII"/>
+                <Label layoutX="445.0" layoutY="229.0" text="VI"/>
+                <Label layoutX="447.0" layoutY="193.0" text="V"/>
+                <Label layoutX="444.0" layoutY="157.0" text="IV" textAlignment="CENTER"/>
+                <Label layoutX="446.0" layoutY="121.0" text="III"/>
+                <Label layoutX="448.0" layoutY="85.0" text="II"/>
+                <Label layoutX="449.0" layoutY="49.0" text="I" textAlignment="CENTER"/>
+                <Label layoutX="435.0" layoutY="14.0" text="RZĄD">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="397.0" layoutY="393.0" text="SALA ">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="hallNumber" layoutX="466.0" layoutY="393.0" text="1">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </center>
+    <right>
+        <VBox fx:id="rightVBox">
+            <BorderPane.margin>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </BorderPane.margin>
+            <padding>
+                <Insets top="20" right="40" bottom="20" left="40"/>
+            </padding>
+            <Button fx:id="backButton" layoutX="782.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#toNextStep" text="Dalej"/>
+            <Button layoutX="694.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Przerwij"/>
+            <ScrollPane layoutX="875.0" layoutY="134.0" prefHeight="406.0" prefWidth="376.0" styleClass="scroll-pane">
+                <content>
+                    <VBox fx:id="personList" fillWidth="true" spacing="10.0"/>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </right>
+</BorderPane>

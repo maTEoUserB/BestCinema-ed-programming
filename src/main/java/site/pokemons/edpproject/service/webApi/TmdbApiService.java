@@ -11,13 +11,22 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class TmdbApiService {
-    public TmdbApiService() throws IOException, InterruptedException {
+    private static TmdbApiService instance;
+
+    private TmdbApiService() {
+    }
+
+    public static synchronized TmdbApiService getInstance() throws IOException, InterruptedException {
+        if (instance == null) {
+            instance =  new TmdbApiService();
+        }
+        return instance;
     }
 
     public NowPlayingResponse getMovieList() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.themoviedb.org/3/movie/now_playing?api_key=f381cf50b9371d27bc42784561474705&include_adult=false&language=pl-PL&page=1"))
+                .uri(URI.create("https://api.themoviedb.org/3/movie/now_playing?api_key=" + System.getenv("TMBD_API_KEY") + "&include_adult=false&language=pl-PL&page=1"))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

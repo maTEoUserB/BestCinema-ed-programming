@@ -7,6 +7,18 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailService {
+    private static EmailService instance;
+
+    private EmailService() {}
+
+    public static synchronized EmailService getInstance() {
+        if (instance == null) {
+            return new EmailService();
+        }
+        return instance;
+    }
+
+
     private final String fromEmail = System.getenv("MY_EMAIL");
     private final String password = System.getenv("MY_EMAIL_PASS");
 

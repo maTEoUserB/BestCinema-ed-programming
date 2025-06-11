@@ -16,7 +16,9 @@ public class PersonRow {
 
     public PersonRow(Long id, String seatNumber) {
         this.seatNumber.setText(seatNumber);
+        this.seatNumber.setStyle("-fx-text-fill: white;");
         isReduced.setText("Czy bilet ulgowy?");
+        isReduced.setStyle("-fx-text-fill: white;");
         layout.getChildren().addAll(isReduced);
         reservationSeatId = id;
     }

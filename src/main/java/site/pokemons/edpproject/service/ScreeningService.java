@@ -9,7 +9,6 @@ import site.pokemons.edpproject.model.Screening;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
-import site.pokemons.edpproject.service.serviceSingleton.MovieServiceSingleton;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,10 +17,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScreeningService {
-    public ScreeningService() {}
+    private static ScreeningService instance;
+
+    private ScreeningService() {}
+
+    public static synchronized ScreeningService getInstance() {
+        if (instance == null) {
+            return new ScreeningService();
+        }
+        return instance;
+    }
 
     public Screening saveScreening(MovieDTO movie, double price, int hallId, LocalDate date, int hour, int minute) {
-        long movieId = MovieServiceSingleton.getInstance().saveMovie(movie);
+        long movieId = MovieService.getInstance().saveMovie(movie);
 
         EntityManager em = JpaPersistenceUnit.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -41,23 +49,16 @@ public class ScreeningService {
             em.persist(screening);
 
             showAlert("Ekranizację zapisano do bazy!", Alert.AlertType.INFORMATION);
+            tx.commit();
             return screening;
         } catch (Exception e){
             if(tx.isActive()) tx.rollback();
             e.printStackTrace();
             showAlert("Nie udało się zapisać ekranizacji w bazie.", Alert.AlertType.ERROR);
         } finally {
-            if(tx.isActive()) tx.commit();
             em.close();
         }
         return null;
-    }
-
-    private void showAlert(String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     public List<ScreeningDTO> findScreenings(LocalDate date) {
@@ -85,5 +86,12 @@ public class ScreeningService {
             screeningDTO.setImageUrl(s.getMovie().getImageUrl());
             return screeningDTO;
         }).collect(Collectors.toList());
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

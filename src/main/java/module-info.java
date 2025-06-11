@@ -17,6 +17,7 @@ module site.pokemons.edpproject {
     requires org.json;
     requires javafx.web;
     requires java.net.http;
+    requires org.apache.commons.configuration2;
     opens site.pokemons.edpproject.model to org.hibernate.orm.core;
     exports site.pokemons.edpproject.controller;
     opens site.pokemons.edpproject.controller to javafx.fxml;

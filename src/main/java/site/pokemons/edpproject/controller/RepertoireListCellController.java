@@ -16,13 +16,12 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import lombok.Setter;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
-import site.pokemons.edpproject.service.serviceSingleton.EmailServiceSingleton;
-import site.pokemons.edpproject.service.serviceSingleton.YouTubeApiServiceSingleton;
+import site.pokemons.edpproject.service.EmailService;
+import site.pokemons.edpproject.service.webApi.YouTubeApiService;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 
@@ -49,33 +48,23 @@ public class RepertoireListCellController {
 
     @FXML
     public void showTrailer(MouseEvent mouseEvent) throws IOException, InterruptedException {
-        String videoId = YouTubeApiServiceSingleton.getInstance().getMovieTrailerLink(titleLabel.getText());
+        String videoId = YouTubeApiService.getInstance().getMovieTrailerLink(titleLabel.getText());
         showTrailerPanel(videoId);
     }
 
     public void setData(ScreeningDTO screening) {
         titleLabel.setText(screening.getTitle());
         overviewLabel.setText(screening.getDescription());
-        startTimeLabel.setText(screening.getStartTime().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        startTimeLabel.setText(screening.getStartTime().format(formatter));
         image.setImage(new Image(screening.getImageUrl(), true));
 
         bookSeatsButton.setOnAction(event -> {
+            //Wysłanie maila z informacją o rozpoczęciu rezerwacji
             String toEmail = SessionContext.getLoggedInUserEmail();
-            String subject = "Rezerwacja BestCinema.";
+            String subject = "Rozpoczęcie rezerwacji w BestCinema.";
             String body = "Rozpocząłeś rezerwację na film " + screening.getTitle() + ".";
-
-            new Thread(() -> {
-                try {
-                    EmailServiceSingleton.getInstance().sendEmail(toEmail, subject, body);
-                    Platform.runLater(() -> {
-                        showAlert("Wysłano rezerwację na maila.", Alert.AlertType.INFORMATION);
-                    });
-                } catch (MessagingException e) {
-                    Platform.runLater(() -> {
-                        showAlert("Nie udało się wysłać rezerwacji na maila.", Alert.AlertType.ERROR);
-                    });
-                }
-            }).start();
+            sendEmail(toEmail, subject, body);
 
             CinemaHallController controller = (CinemaHallController) controllers.get("hall-controller");
             controller.setHallNumber(screening.getHallId());
@@ -95,7 +84,7 @@ public class RepertoireListCellController {
         <html>
         <body style='margin:0; background-color: black; display: flex; justify-content: center; align-items: center; height: 100vh;'>
             <iframe width='640' height='360'
-                src='https://www.youtube.com/embed/%s'
+                src='https://www.youtube.com/embed/%s?rel=0'
                 frameborder='0' allowfullscreen>
             </iframe>
         </body>
@@ -106,7 +95,7 @@ public class RepertoireListCellController {
         webView.getEngine().loadContent(content);
 
         Parent previousRoot = scene.getRoot();
-        Button backButton = new Button("⟵ Wróć");
+        Button backButton = new Button("Wróć");
         backButton.setOnAction(e -> {
             webView.getEngine().loadContent("<html><body></body></html>");
 
@@ -122,6 +111,18 @@ public class RepertoireListCellController {
 
         scene.setRoot(layout);
 
+    }
+
+    private void sendEmail(String toEmail, String subject, String body) {
+        new Thread(() -> {
+            try {
+                EmailService.getInstance().sendEmail(toEmail, subject, body);
+            } catch (MessagingException e) {
+                Platform.runLater(() -> {
+                    showAlert("Nie udało się wysłać rezerwacji na maila.", Alert.AlertType.ERROR);
+                });
+            }
+        }).start();
     }
 
     private void showAlert(String message, Alert.AlertType type) {

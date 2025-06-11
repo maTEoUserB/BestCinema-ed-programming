@@ -7,30 +7,39 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="650.0" prefWidth="910.0" stylesheets="@../../../../styles/registerStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RegisterController">
-   <children>
-      <VBox layoutX="296.0" layoutY="32.0" prefHeight="586.0" prefWidth="317.0" styleClass="vbox">
-         <children>
-            <Label fx:id="infoLabel" />
-            <Label fx:id="usernameLb" text="Nazwa użytkownika" />
-            <TextField fx:id="usernameText" styleClass="text-field" />
-            <Label text="Email" />
-            <TextField fx:id="emailText" />
-            <Label text="Imię" />
-            <TextField fx:id="nameText" />
-            <Label text="Nazwisko" />
-            <TextField fx:id="surnameText" />
-            <Label fx:id="passwdLb" text="Hasło" />
-            <PasswordField fx:id="passwdText" styleClass="text-field" />
-            <Label fx:id="cfPasswdLb" text="Powtórz hasło" />
-            <PasswordField fx:id="cfPasswdText" styleClass="text-field" />
-            <CheckBox fx:id="agreeCheck" mnemonicParsing="false" prefHeight="40.0" prefWidth="174.0" text="Zgoda na regulamin" />
-            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#registerHandle" styleClass="register-button" text="Zarejestruj się" />
-            <Label fx:id="loginLabel" onMouseClicked="#loginLoadHandle" text="Przejdź do logowania" />
-         </children>
-      </VBox>
-   </children>
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<StackPane prefHeight="650.0"
+           prefWidth="910.0"
+           stylesheets="@../../../../styles/registerStyle.css"
+           xmlns="http://javafx.com/javafx/22"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="site.pokemons.edpproject.controller.RegisterController">
+    <children>
+        <VBox alignment="CENTER" spacing="10" maxWidth="350" maxHeight="500" styleClass="vbox">
+            <padding>
+                <Insets top="20" right="40" bottom="20" left="40"/>
+            </padding>
+            <Label fx:id="infoLabel"/>
+            <Label fx:id="usernameLb" text="Nazwa użytkownika"/>
+            <TextField fx:id="usernameText" styleClass="text-field"/>
+            <Label text="Email"/>
+            <TextField fx:id="emailText"/>
+            <Label text="Imię"/>
+            <TextField fx:id="nameText"/>
+            <Label text="Nazwisko"/>
+            <TextField fx:id="surnameText"/>
+            <Label fx:id="passwdLb" text="Hasło"/>
+            <PasswordField fx:id="passwdText" styleClass="text-field"/>
+            <Label fx:id="cfPasswdLb" text="Powtórz hasło"/>
+            <PasswordField fx:id="cfPasswdText" styleClass="text-field"/>
+            <CheckBox fx:id="agreeCheck" mnemonicParsing="false" prefHeight="40.0" prefWidth="174.0"
+                      text="Zgoda na regulamin"/>
+            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#registerHandle"
+                    styleClass="register-button" text="Zarejestruj się"/>
+            <Label fx:id="loginLabel" onMouseClicked="#loginLoadHandle" text="Przejdź do logowania"/>
+        </VBox>
+    </children>
+</StackPane>

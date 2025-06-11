@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import site.pokemons.edpproject.controller.*;
+import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,8 +17,11 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException, InterruptedException {
         //Utworzenie widoków przy starcie
         Map<String, Parent> views = new HashMap<>();
-        //Utworzenie kontrolerów
+        //Utworzenie kontrolerów przy starcie
         Map<String, Object> controllers = new HashMap<>();
+
+        //Inicjalizacja EntityManagerFactory
+        new Thread(JpaPersistenceUnit::getEntityManager).start();
 
         //REPERTOIRE
         FXMLLoader fxmlRepertoireLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/repertoire-view.fxml"));
@@ -36,6 +40,7 @@ public class HelloApplication extends Application {
         });
         Parent repertoireView = fxmlRepertoireLoader.load();
         views.put("repertoire-view", repertoireView);
+        controllers.put("repertoire-controller", repertoireController);
 
         //HALL
         FXMLLoader fxmlHallLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/cinema-hall-view.fxml"));
@@ -55,25 +60,6 @@ public class HelloApplication extends Application {
         Parent hallView = fxmlHallLoader.load();
         views.put("hall-view", hallView);
         controllers.put("hall-controller", hallController);
-
-        //HALL
-        FXMLLoader fxmlReservationLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/reservation-view.fxml"));
-        ReservationController reservationController = new ReservationController();
-        fxmlReservationLoader.setControllerFactory(type -> {
-            if (type == ReservationController.class) {
-                return reservationController;
-            } else {
-                try {
-                    return type.getDeclaredConstructor().newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        Parent reservationView = fxmlReservationLoader.load();
-        views.put("reservation-view", reservationView);
-        controllers.put("reservation-controller", reservationController);
 
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
@@ -154,8 +140,9 @@ public class HelloApplication extends Application {
         loginController.setViews(views);
         repertoireController.setViews(views);
         profileController.setViews(views);
-        reservationController.setViews(views);
+        hallController.setViews(views);
 
+        loginController.setControllers(controllers);
         repertoireController.setControllers(controllers);
 
         Scene scene = new Scene(registerView);
@@ -165,7 +152,7 @@ public class HelloApplication extends Application {
         adminController.setScene(scene);
         loginController.setScene(scene);
         profileController.setScene(scene);
-        reservationController.setScene(scene);
+        hallController.setScene(scene);
         
         stage.setWidth(900);
         stage.setHeight(700);
@@ -174,7 +161,6 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    //AIzaSyD64Spkj4Fcmm310IQiKMUslHrr-_BRo34
     public static void main(String[] args) {
         launch();
     }

@@ -9,20 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeatService {
-    public List<String> getOccupiedSeats(Long hallId){
-//        EntityManager em = JpaPersistenceUnit.getEntityManager();
-//
-//        CinemaHall hall = em.find(CinemaHall.class, hallId);
-//        List<Seat> seats = em.createQuery("" +
-//                        "SELECT s FROM Seat s " +
-//                        "WHERE s.hall = :hall " +
-//                        "AND s.occupied = true"
-//                        , Seat.class
-//                ).setParameter("hall",hall)
-//                .getResultStream().toList();
+    private static SeatService instance;
 
-//        return seats.stream().map(Seat::getSeatNumber).toList();
+    private SeatService(){}
 
-        return new ArrayList<>();
+    public static synchronized SeatService getInstance() {
+        if(instance == null) {
+            instance = new SeatService();
+        }
+        return instance;
+    }
+
+    public List<String> getOccupiedSeats(Long screeningId) {
+        EntityManager em = JpaPersistenceUnit.getEntityManager();
+
+        return em.createQuery("""
+                        SELECT rs.seat.seatNumber
+                        FROM ReservationSeat rs
+                        WHERE rs.occupied = true
+                          AND rs.reservation.screening.screeningId = :screeningId
+                        """, String.class)
+                .setParameter("screeningId", screeningId)
+                .getResultList();
     }
 }

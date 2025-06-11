@@ -8,9 +8,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
-import site.pokemons.edpproject.service.serviceSingleton.ScreeningServiceSingleton;
+import site.pokemons.edpproject.service.ScreeningService;
 import site.pokemons.edpproject.session.SessionContext;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,14 @@ public class RepertoireController {
 
 
     public void loadRepertoire(MouseEvent mouseEvent) {
-        List<ScreeningDTO> screenings = ScreeningServiceSingleton.getInstance().findScreenings(datePicker.getValue());
+        List<ScreeningDTO> screenings = ScreeningService.getInstance().findScreenings(datePicker.getValue());
+        repertoireList.getItems().setAll(screenings);
+
+        repertoireList.setCellFactory(listCell -> new RepertoireListCell(scene, views, controllers));
+    }
+
+    public void loadRepertoireForDate(LocalDate now) {
+        List<ScreeningDTO> screenings = ScreeningService.getInstance().findScreenings(now);
         repertoireList.getItems().setAll(screenings);
 
         repertoireList.setCellFactory(listCell -> new RepertoireListCell(scene, views, controllers));
@@ -49,4 +57,5 @@ public class RepertoireController {
     private void showUserProfilePanel() {
         scene.setRoot(views.get("profile-view"));
     }
+
 }

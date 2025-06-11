@@ -80,6 +80,32 @@ Label {
     -fx-background-color: #e46060;
 }
 
+.seat-button-selected {
+    -fx-background-color: red;
+}
+
+.seat-button-occupied {
+    -fx-background-color: gray;
+}
+
+.scroll-pane {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+/* Styl dla obszaru przewijanego (viewport) */
+.scroll-pane > .viewport {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+/* Styl dla zawartości ScrollPane – czyli VBox z osobami */
+.scroll-pane .vbox {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
 /* ListView - usuń domyślne obramowanie, ciemne tło */
 .list-view {
     -fx-background-color: #1e1e1e;

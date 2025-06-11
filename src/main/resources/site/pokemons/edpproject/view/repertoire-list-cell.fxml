@@ -6,21 +6,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="178.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RepertoireListCellController">
-   <children>
-      <VBox prefHeight="120.0" prefWidth="743.0">
-         <children>
-            <Label fx:id="titleLabel" prefHeight="18.0" prefWidth="743.0" />
-            <Label fx:id="overviewLabel" prefHeight="18.0" prefWidth="743.0" />
-            <Label fx:id="startTimeLabel" prefHeight="18.0" prefWidth="743.0" />
-            <ImageView fx:id="image" fitHeight="120.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </VBox>
-      <VBox prefHeight="178.0" prefWidth="150.0">
-         <children>
-            <Button fx:id="bookSeatsButton" mnemonicParsing="false" text="Zarezerwuj miejsca" />
-            <Button fx:id="trailerButton" mnemonicParsing="false" onMouseClicked="#showTrailer" text="Sprawdź trailer" />
-         </children>
-      </VBox>
-   </children>
+<HBox alignment="TOP_LEFT" maxWidth="900" spacing="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RepertoireListCellController">
+    <children>
+        <ImageView fx:id="image" fitHeight="300" pickOnBounds="true" preserveRatio="true" smooth="true" />
+
+        <VBox maxWidth="600" spacing="5">
+            <children>
+                <Label fx:id="titleLabel" maxWidth="600" style="-fx-font-weight: bold; -fx-font-size: 16px;" wrapText="true" />
+                <Label fx:id="overviewLabel" maxWidth="600" wrapText="true" />
+                <Label fx:id="startTimeLabel" />
+            </children>
+        </VBox>
+
+        <VBox prefHeight="300.0" prefWidth="189.0">
+            <children>
+                <Button fx:id="bookSeatsButton" prefHeight="26.0" prefWidth="194.0" text="Zarezerwuj" />
+                <Button fx:id="trailerButton" onMouseClicked="#showTrailer" prefHeight="26.0" prefWidth="194.0" text="Sprawdź trailer" />
+            </children>
+        </VBox>
+    </children>
 </HBox>
