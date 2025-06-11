@@ -28,6 +28,7 @@ public class CinemaHallController {
     @FXML private AnchorPane rootPane;
     @FXML private Label hallNumber;
     @FXML private Button backButton;
+    @FXML private Button nextStepButton;
     @FXML
     private VBox personList;
     private List<PersonRow> personRows = new ArrayList<>();
@@ -40,7 +41,11 @@ public class CinemaHallController {
     private List<Button> clickedSeats = new ArrayList<>();
     private List<String> occupiedSeats = new ArrayList<>();
 
-
+    @FXML
+    public void initialize() {
+        nextStepButton.setOnAction(event -> toNextStep());
+        backButton.setOnAction(event -> goBack());
+    }
 
     @FXML
     public void chooseSeat(MouseEvent mouseEvent) {
@@ -54,7 +59,7 @@ public class CinemaHallController {
     }
 
     @FXML
-    public void toNextStep(MouseEvent mouseEvent) {
+    public void toNextStep() {
         unmarkOccupiedSeats();
         for(PersonRow personRow : personRows) {
             ReservationService.getInstance().updateReservationSeat(personRow.getReservationSeatId(), personRow.getIsReduced().isSelected());
@@ -72,7 +77,7 @@ public class CinemaHallController {
     }
 
     @FXML
-    public void goBack(MouseEvent mouseEvent) {
+    public void goBack() {
         unmarkOccupiedSeats();
         ReservationService.getInstance().deleteReservation(reservation.getReservationId());
         personRows.clear();

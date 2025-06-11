@@ -27,15 +27,14 @@
             <VBox spacing="10" GridPane.columnIndex="0" alignment="CENTER_LEFT">
                 <Label text="Wybierz datę"/>
                 <DatePicker fx:id="datePicker" prefWidth="200"/>
-                <Button fx:id="repertoireButton"
-                        text="Wyświetl repertuar"
-                        onMouseClicked="#loadRepertoire"
-                        prefWidth="200"/>
+<!--                <Button fx:id="repertoireButton"-->
+<!--                        text="Wyświetl repertuar"-->
+<!--                        prefWidth="200"/>-->
             </VBox>
 
             <VBox spacing="10" GridPane.columnIndex="1" alignment="CENTER_RIGHT">
-                <Button text="Wyloguj się" onMouseClicked="#logoutButtonClick" prefWidth="120"/>
-                <Button text="Profil" onMouseClicked="#goToProfileView" prefWidth="120"/>
+                <Button fx:id="logoutButton" text="Wyloguj się" prefWidth="120"/>
+                <Button fx:id="profileButton" text="Profil" prefWidth="120"/>
             </VBox>
         </GridPane>
 

@@ -3,6 +3,7 @@ package site.pokemons.edpproject.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -25,9 +26,18 @@ public class RepertoireController {
 
     @FXML private DatePicker datePicker;
     @FXML private ListView<ScreeningDTO> repertoireList;
+    @FXML private Button logoutButton;
+    @FXML private Button profileButton;
+
+    @FXML
+    public void initialize() {
+        datePicker.setOnAction(event -> loadRepertoire());
+        logoutButton.setOnAction(event -> logoutButtonClick());
+        profileButton.setOnAction(event -> goToProfileView());
+    }
 
 
-    public void loadRepertoire(MouseEvent mouseEvent) {
+    public void loadRepertoire() {
         List<ScreeningDTO> screenings = ScreeningService.getInstance().findScreenings(datePicker.getValue());
         repertoireList.getItems().setAll(screenings);
 
@@ -41,12 +51,12 @@ public class RepertoireController {
         repertoireList.setCellFactory(listCell -> new RepertoireListCell(scene, views, controllers));
     }
 
-    public void logoutButtonClick(MouseEvent mouseEvent) {
+    public void logoutButtonClick() {
         SessionContext.clear();
         showLoginPanel();
     }
 
-    public void goToProfileView(MouseEvent mouseEvent) {
+    public void goToProfileView() {
         showUserProfilePanel();
     }
 

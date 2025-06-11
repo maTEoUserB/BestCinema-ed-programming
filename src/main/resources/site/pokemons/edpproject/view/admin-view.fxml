@@ -16,8 +16,8 @@
    </padding>
 
    <HBox spacing="10">
-      <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" text="Wyloguj" />
-      <Button mnemonicParsing="false" onMouseClicked="#goToProfileView" text="Profil" />
+      <Button fx:id="logoutButton" mnemonicParsing="false" text="Wyloguj" />
+      <Button fx:id="profileButton" mnemonicParsing="false" text="Profil" />
    </HBox>
 
    <ListView fx:id="movieList" VBox.vgrow="ALWAYS" />

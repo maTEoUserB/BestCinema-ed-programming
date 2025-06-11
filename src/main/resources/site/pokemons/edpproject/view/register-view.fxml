@@ -37,7 +37,7 @@
             <PasswordField fx:id="cfPasswdText" styleClass="text-field"/>
             <CheckBox fx:id="agreeCheck" mnemonicParsing="false" prefHeight="40.0" prefWidth="174.0"
                       text="Zgoda na regulamin"/>
-            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#registerHandle"
+            <Button fx:id="registerButton" mnemonicParsing="false"
                     styleClass="register-button" text="Zarejestruj się"/>
             <Label fx:id="loginLabel" onMouseClicked="#loginLoadHandle" text="Przejdź do logowania"/>
         </VBox>

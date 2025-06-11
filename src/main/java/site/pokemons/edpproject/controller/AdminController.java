@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminController {
-    @FXML private Button loadButton;
     @FXML private Button logoutButton;
+    @FXML private Button profileButton;
     @FXML private ListView<MovieDTO> movieList;
 
     @Setter
@@ -29,6 +29,9 @@ public class AdminController {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
+        logoutButton.setOnAction(event -> logoutButtonClick());
+        profileButton.setOnAction(event -> goToProfileView());
+
         new Thread(() -> {
             NowPlayingResponse response = null;
             try {
@@ -45,12 +48,12 @@ public class AdminController {
         }).start();
     }
 
-    public void logoutButtonClick(MouseEvent mouseEvent) {
+    public void logoutButtonClick() {
         SessionContext.clear();
         showLoginPanel();
     }
 
-    public void goToProfileView(MouseEvent mouseEvent) {
+    public void goToProfileView() {
         showUserProfilePanel();
     }
 

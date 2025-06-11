@@ -34,7 +34,9 @@
             <Spinner fx:id="hourSpinner" />
             <Label text="Minuta" />
             <Spinner fx:id="minuteSpinner" />
-            <Button fx:id="saveButton" text="Zapisz w repertuarze" maxWidth="Infinity" />
+            <Button fx:id="saveButton"
+                    text="Zapisz w repertuarze"
+                    maxWidth="Infinity" />
          </children>
       </VBox>
    </children>

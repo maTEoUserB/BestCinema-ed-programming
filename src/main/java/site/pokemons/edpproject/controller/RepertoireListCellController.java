@@ -47,7 +47,17 @@ public class RepertoireListCellController {
     private Map<String, Object> controllers;
 
     @FXML
-    public void showTrailer(MouseEvent mouseEvent) throws IOException, InterruptedException {
+    public void initialize() {
+        trailerButton.setOnAction(event -> {
+            try {
+                showTrailer();
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public void showTrailer() throws IOException, InterruptedException {
         String videoId = YouTubeApiService.getInstance().getMovieTrailerLink(titleLabel.getText());
         showTrailerPanel(videoId);
     }

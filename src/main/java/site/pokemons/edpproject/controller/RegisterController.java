@@ -3,10 +3,7 @@ package site.pokemons.edpproject.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
@@ -36,9 +33,16 @@ public class RegisterController {
     private CheckBox agreeCheck;
     @FXML
     private Label infoLabel;
+    @FXML
+    private Button registerButton;
 
     @FXML
-    public void registerHandle(MouseEvent mouseEvent) {
+    public void initialize() {
+        registerButton.setOnAction(event -> registerHandle());
+    }
+
+    @FXML
+    public void registerHandle() {
         InputValidator inputValidator = InputValidator.getInstance();
         if (!inputValidator.isValidUsername(usernameText.getText())) {
             showAlert("Nazwa użytkownika musi zawierać co najmniej 8 znaków, w tym jedną cyfrę.", Alert.AlertType.WARNING);

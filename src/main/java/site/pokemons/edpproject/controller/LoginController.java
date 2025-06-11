@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -22,12 +23,18 @@ public class LoginController {
     @Setter
     private Map<String, Object> controllers;
 
+    @FXML private Button loginButton;
     @FXML private TextField usernameText;
     @FXML private TextField passwdText;
     @FXML private Label infoLabel;
 
     @FXML
-    public void loginHandle(MouseEvent mouseEvent) {
+    public void initialize() {
+        loginButton.setOnAction(event -> loginHandle());
+    }
+
+    @FXML
+    public void loginHandle() {
         UserService userService = UserService.getInstance();
         boolean log = userService.loginUser(usernameText.getText(), passwdText.getText());
         clearLoginPage();

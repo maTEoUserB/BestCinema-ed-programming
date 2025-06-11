@@ -26,7 +26,7 @@
             <TextField fx:id="usernameText" />
             <Label fx:id="passwdLb" text="Hasło" />
             <PasswordField fx:id="passwdText" />
-            <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#loginHandle" styleClass="login-button" text="Zaloguj" />
+            <Button fx:id="loginButton" mnemonicParsing="false" styleClass="login-button" text="Zaloguj" />
             <Label onMouseClicked="#registerLoadHandle" text="Przejdź do rejestracji" />
       </VBox>
    </children>

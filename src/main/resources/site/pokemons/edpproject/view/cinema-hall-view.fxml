@@ -355,8 +355,8 @@
             <padding>
                 <Insets top="20" right="40" bottom="20" left="40"/>
             </padding>
-            <Button fx:id="backButton" layoutX="782.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#toNextStep" text="Dalej"/>
-            <Button layoutX="694.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Przerwij"/>
+            <Button fx:id="nextStepButton" layoutX="782.0" layoutY="510.0" mnemonicParsing="false" text="Dalej"/>
+            <Button fx:id="backButton" layoutX="694.0" layoutY="510.0" mnemonicParsing="false" text="Przerwij"/>
             <ScrollPane layoutX="875.0" layoutY="134.0" prefHeight="406.0" prefWidth="376.0" styleClass="scroll-pane">
                 <content>
                     <VBox fx:id="personList" fillWidth="true" spacing="10.0"/>

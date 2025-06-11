@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 import site.pokemons.edpproject.session.SessionContext;
@@ -33,9 +33,25 @@ public class UserProfileController {
     private TextField newPasswordField;
     @FXML
     private TextField secondPasswordField;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private Button changePasswordButton;
+    @FXML
+    private Button changeButton;
+
+    @FXML
+    public void initialize() {
+        backButton.setOnAction(event -> backToRepertoire());
+        logoutButton.setOnAction(event -> logout());
+        changePasswordButton.setOnAction(event -> changePassword());
+        changeButton.setOnAction(event -> changeInformation());
+    }
 
 
-    public void backToRepertoire(MouseEvent mouseEvent) {
+    public void backToRepertoire() {
         if (SessionContext.getLoggedInUserRole().equals("USER")) {
             scene.setRoot(views.get("repertoire-view"));
         } else {
@@ -43,12 +59,12 @@ public class UserProfileController {
         }
     }
 
-    public void logout(MouseEvent mouseEvent) {
+    public void logout() {
         SessionContext.clear();
         showLoginPanel();
     }
 
-    public void changeInformation(MouseEvent mouseEvent) {
+    public void changeInformation() {
         InputValidator inputValidator = InputValidator.getInstance();
         if (!emailField.getText().isEmpty() && !inputValidator.isValidEmail(emailField.getText())) {
             showAlert("Błędny format email.", Alert.AlertType.WARNING);
@@ -66,7 +82,7 @@ public class UserProfileController {
     }
 
 
-    public void changePassword(MouseEvent mouseEvent) {
+    public void changePassword() {
         if (passwordField.getText().isEmpty() || newPasswordField.getText().isEmpty() || secondPasswordField.getText().isEmpty()) {
             showAlert("Podaj hasło.", Alert.AlertType.WARNING);
             return;

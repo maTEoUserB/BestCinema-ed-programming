@@ -21,7 +21,7 @@
         <VBox prefHeight="300.0" prefWidth="189.0">
             <children>
                 <Button fx:id="bookSeatsButton" prefHeight="26.0" prefWidth="194.0" text="Zarezerwuj" />
-                <Button fx:id="trailerButton" onMouseClicked="#showTrailer" prefHeight="26.0" prefWidth="194.0" text="Sprawdź trailer" />
+                <Button fx:id="trailerButton" prefHeight="26.0" prefWidth="194.0" text="Sprawdź trailer" />
             </children>
         </VBox>
     </children>

@@ -31,36 +31,37 @@ public class MovieListCellController {
         titleLabel.setText(movie.getTitle());
         overviewLabel.setText(movie.getOverview());
         image.setImage(new Image("https://image.tmdb.org/t/p/w400" + movie.getPosterPath()));
-
         datePicker.setValue(LocalDate.now());
 
-        saveButton.setOnAction(event -> {
-            String priceText = priceField.getText();
-            String hall = hallField.getText();
-            LocalDate date = datePicker.getValue();
-            int hour = hourSpinner.getValue();
-            int minute = minuteSpinner.getValue();
+        saveButton.setOnAction(event -> saveScreening(movie));
+    }
 
-            if (priceText == null || priceText.isEmpty() || hall == null || hall.isEmpty() || date == null) {
-                showAlert("Uzupełnij wszystkie pola!", Alert.AlertType.WARNING);
-                return;
-            }
+    private void saveScreening(MovieDTO movie) {
+        String priceText = priceField.getText();
+        String hall = hallField.getText();
+        LocalDate date = datePicker.getValue();
+        int hour = hourSpinner.getValue();
+        int minute = minuteSpinner.getValue();
 
-            try {
-                double price = Double.parseDouble(priceText);
-                int hallId = Integer.parseInt(hall);
+        if (priceText == null || priceText.isEmpty() || hall == null || hall.isEmpty() || date == null) {
+            showAlert("Uzupełnij wszystkie pola!", Alert.AlertType.WARNING);
+            return;
+        }
 
-                // zapisz do bazy
-                ScreeningService.getInstance().saveScreening(movie, price, hallId, date, hour, minute);
+        try {
+            double price = Double.parseDouble(priceText);
+            int hallId = Integer.parseInt(hall);
 
-                priceField.clear();
-                hallField.clear();
-                datePicker.setValue(LocalDate.now());
-                showAlert("Film zapisany!", Alert.AlertType.INFORMATION);
-            } catch (NumberFormatException e) {
-                showAlert("Niepoprawna cena", Alert.AlertType.ERROR);
-            }
-        });
+            // zapisz do bazy
+            ScreeningService.getInstance().saveScreening(movie, price, hallId, date, hour, minute);
+
+            priceField.clear();
+            hallField.clear();
+            datePicker.setValue(LocalDate.now());
+            showAlert("Film zapisany!", Alert.AlertType.INFORMATION);
+        } catch (NumberFormatException e) {
+            showAlert("Niepoprawna cena", Alert.AlertType.ERROR);
+        }
     }
 
     private void showAlert(String message, Alert.AlertType type) {
