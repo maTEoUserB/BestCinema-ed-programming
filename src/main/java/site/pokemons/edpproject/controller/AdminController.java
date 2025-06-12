@@ -1,64 +1,55 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import lombok.Setter;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
-import site.pokemons.edpproject.service.ScreeningService;
-import site.pokemons.edpproject.service.TmdbApiService;
+import site.pokemons.edpproject.service.webApi.TmdbApiService;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AdminController {
-    @FXML private Button loadButton;
     @FXML private Button logoutButton;
+    @FXML private Button profileButton;
     @FXML private ListView<MovieDTO> movieList;
 
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-    private final TmdbApiService tmdbApiService;
-    private final ScreeningService screeningService;
-
-    public AdminController(TmdbApiService tmdbApiService, ScreeningService screeningService) {
-        this.tmdbApiService = tmdbApiService;
-        this.screeningService = screeningService;
-    }
 
     @FXML
-    public void initialize() throws IOException, InterruptedException {
-        NowPlayingResponse response = tmdbApiService.getMovieList();
-        List<MovieDTO> movies = response.getResults();
-        movieList.getItems().setAll(movies);
+    public void initialize() {
+        logoutButton.setOnAction(event -> logoutButtonClick());
+        profileButton.setOnAction(event -> goToProfileView());
 
-        movieList.setCellFactory(listCell -> new MovieListCell(screeningService));
+        new Thread(() -> {
+            NowPlayingResponse response;
+            try {
+                response = TmdbApiService.getInstance().getMovieList();
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            List<MovieDTO> movies = response.getResults();
+            movieList.getItems().setAll(movies);
 
+            movieList.setCellFactory(listCell -> new MovieListCell());
+        }).start();
     }
 
-    public void logoutButtonClick(MouseEvent mouseEvent) {
+    public void logoutButtonClick() {
         SessionContext.clear();
         showLoginPanel();
     }
 
-    public void goToProfileView(MouseEvent mouseEvent) {
+    public void goToProfileView() {
         showUserProfilePanel();
     }
 
     private void showLoginPanel() {
-        scene.setRoot(views.get("login-view"));
+        ViewManager.getInstance().switchTo("login-view");
     }
 
     private void showUserProfilePanel() {
-        scene.setRoot(views.get("profile-view"));
+        ViewManager.getInstance().switchTo("profile-view");
     }
 }

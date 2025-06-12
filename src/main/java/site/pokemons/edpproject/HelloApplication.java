@@ -6,32 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import site.pokemons.edpproject.controller.*;
-import site.pokemons.edpproject.model.CinemaHall;
-import site.pokemons.edpproject.service.MovieService;
-import site.pokemons.edpproject.service.ScreeningService;
-import site.pokemons.edpproject.service.TmdbApiService;
-import site.pokemons.edpproject.service.UserService;
+import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
-        UserService userService = new UserService();
-        MovieService movieService = new MovieService();
-        ScreeningService screeningService = new ScreeningService(movieService);
-        TmdbApiService tmdbApiService = new TmdbApiService();
+        //Inicjalizacja ViewManager
+        ViewManager vm = ViewManager.getInstance();
 
-        //Utworzenie widoków przy starcie
-        Map<String, Parent> views = new HashMap<>();
-        //Utworzenie kontrolerów
-        Map<String, Object> controllers = new HashMap<>();
+        //Inicjalizacja EntityManagerFactory
+        new Thread(JpaPersistenceUnit::getEntityManager).start();
 
         //REPERTOIRE
         FXMLLoader fxmlRepertoireLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/repertoire-view.fxml"));
-        RepertoireController repertoireController = new RepertoireController(screeningService);
+        RepertoireController repertoireController = new RepertoireController();
         fxmlRepertoireLoader.setControllerFactory(type -> {
             if (type == RepertoireController.class) {
                 return repertoireController;
@@ -45,7 +35,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent repertoireView = fxmlRepertoireLoader.load();
-        views.put("repertoire-view", repertoireView);
+        vm.addView("repertoire-view", repertoireView);
+        vm.addController("repertoire-controller", repertoireController);
 
         //HALL
         FXMLLoader fxmlHallLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/cinema-hall-view.fxml"));
@@ -63,12 +54,12 @@ public class HelloApplication extends Application {
             }
         });
         Parent hallView = fxmlHallLoader.load();
-        views.put("hall-view", hallView);
-        controllers.put("hall-controller", hallController);
+        vm.addView("hall-view", hallView);
+        vm.addController("hall-controller", hallController);
 
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
-        AdminController adminController =  new AdminController(tmdbApiService, screeningService);
+        AdminController adminController =  new AdminController();
         fxmlAdminLoader.setControllerFactory(type -> {
             if (type == AdminController.class) {
                 return adminController;
@@ -82,11 +73,12 @@ public class HelloApplication extends Application {
             }
         });
         Parent adminView = fxmlAdminLoader.load();
-        views.put("admin-view", adminView);
+        vm.addView("admin-view", adminView);
+        vm.addController("admin-controller", adminController);
 
         //LOGIN
         FXMLLoader fxmlLoginLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/login-view.fxml"));
-        LoginController loginController = new LoginController(userService);
+        LoginController loginController = new LoginController();
         fxmlLoginLoader.setControllerFactory(type -> {
             if (type == LoginController.class) {
                 return loginController;
@@ -100,11 +92,12 @@ public class HelloApplication extends Application {
             }
         });
         Parent loginView = fxmlLoginLoader.load();
-        views.put("login-view", loginView);
+        vm.addView("login-view", loginView);
+        vm.addController("login-controller", loginController);
 
         //USER PROFILE
         FXMLLoader fxmlProfileLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/user-profile-view.fxml"));
-        UserProfileController profileController = new UserProfileController(userService);
+        UserProfileController profileController = new UserProfileController();
         fxmlProfileLoader.setControllerFactory(type -> {
             if (type == UserProfileController.class) {
                 return profileController;
@@ -118,11 +111,12 @@ public class HelloApplication extends Application {
             }
         });
         Parent profileView = fxmlProfileLoader.load();
-        views.put("profile-view", profileView);
+        vm.addView("profile-view", profileView);
+        vm.addController("profile-controller", profileController);
 
         //WEJŚCIOWE OKNO REJESTRACJI
         FXMLLoader fxmlRegisterLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
-        RegisterController regController = new RegisterController(userService);
+        RegisterController regController = new RegisterController();
         fxmlRegisterLoader.setControllerFactory(type -> {
                 if(type == RegisterController.class){
                     return regController;
@@ -138,26 +132,16 @@ public class HelloApplication extends Application {
                 }
         });
         Parent registerView = fxmlRegisterLoader.load();
-        views.put("register-view", registerView);
+        vm.addView("register-view", registerView);
+        vm.addController("register-controller", regController);
 
-        regController.setViews(views);
-        adminController.setViews(views);
-        loginController.setViews(views);
-        repertoireController.setViews(views);
-        profileController.setViews(views);
-
-        repertoireController.setControllers(controllers);
 
         Scene scene = new Scene(registerView);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-        regController.setScene(scene);
-        repertoireController.setScene(scene);
-        adminController.setScene(scene);
-        loginController.setScene(scene);
-        profileController.setScene(scene);
+        vm.setScene(scene);
         
         stage.setWidth(900);
-        stage.setHeight(570);
+        stage.setHeight(700);
         stage.setTitle("BestCinema");
         stage.setScene(scene);
         stage.show();

@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
-import site.pokemons.edpproject.service.ScreeningService;
 
 import java.io.IOException;
 
@@ -12,11 +11,6 @@ public class MovieListCell extends ListCell<MovieDTO> {
     private FXMLLoader loader;
     private HBox root;
     private MovieListCellController controller;
-    private ScreeningService screeningService;
-
-    public MovieListCell(ScreeningService screeningService) {
-        this.screeningService = screeningService;
-    }
 
     @Override
     protected void updateItem(MovieDTO movie, boolean empty) {
@@ -37,7 +31,6 @@ public class MovieListCell extends ListCell<MovieDTO> {
             }
 
 
-            controller.setScreeningService(screeningService);
             controller.setData(movie);
             setText(null);
             setGraphic(root);

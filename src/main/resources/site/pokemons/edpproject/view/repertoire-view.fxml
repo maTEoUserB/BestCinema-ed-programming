@@ -2,21 +2,47 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.RepertoireController">
-   <children>
-      <HBox prefHeight="109.0" prefWidth="900.0">
-         <children>
-            <VBox prefHeight="110.0" prefWidth="182.0">
-               <children>
-                  <Label text="Wybierz datę" />
-                  <DatePicker fx:id="datePicker" />
-                  <Button fx:id="repertoireButton" mnemonicParsing="false" onMouseClicked="#loadRepertoire" prefHeight="26.0" prefWidth="124.0" text="Wyświetl repertuar" />
-               </children>
+<AnchorPane xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="site.pokemons.edpproject.controller.RepertoireController"
+            prefHeight="570.0" prefWidth="910.0">
+
+    <children>
+        <GridPane hgap="20" vgap="10"
+                  AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="60"/>
+                <ColumnConstraints percentWidth="40"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="80"/>
+            </rowConstraints>
+
+            <VBox spacing="10" GridPane.columnIndex="0" alignment="CENTER_LEFT">
+                <Label text="Wybierz datę"/>
+                <DatePicker fx:id="datePicker" prefWidth="200"/>
+<!--                <Button fx:id="repertoireButton"-->
+<!--                        text="Wyświetl repertuar"-->
+<!--                        prefWidth="200"/>-->
             </VBox>
-            <Button mnemonicParsing="false" onMouseClicked="#logoutButtonClick" prefHeight="26.0" prefWidth="107.0" text="Wyloguj się" />
-            <Button mnemonicParsing="false" onMouseClicked="#goToProfileView" text="Profil" />
-         </children></HBox>
-      <ListView fx:id="repertoireList" layoutY="112.0" prefHeight="456.0" prefWidth="900.0" />
-   </children>
+
+            <VBox spacing="10" GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+                <Button fx:id="logoutButton" text="Wyloguj się" prefWidth="120"/>
+                <Button fx:id="profileButton" text="Profil" prefWidth="120"/>
+            </VBox>
+        </GridPane>
+
+
+        <ListView fx:id="repertoireList"
+                  AnchorPane.topAnchor="110.0"
+                  AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0"
+                  AnchorPane.bottomAnchor="0.0"/>
+    </children>
 </AnchorPane>

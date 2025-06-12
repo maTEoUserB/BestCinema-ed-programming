@@ -1,25 +1,15 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
+import site.pokemons.edpproject.validator.InputValidator;
 
-import java.util.Map;
+import java.time.LocalDate;
+
 
 public class RegisterController {
-    @Setter
-    private Scene scene;
-    private final UserService userService;
-    @Setter
-    private Map<String, Parent> views;
-
     @FXML
     private TextField usernameText;
     @FXML
@@ -36,17 +26,28 @@ public class RegisterController {
     private CheckBox agreeCheck;
     @FXML
     private Label infoLabel;
-
-    public RegisterController(UserService userService) {
-        this.userService = userService;
-    }
+    @FXML
+    private Button registerButton;
 
     @FXML
-    public void registerHandle(MouseEvent mouseEvent) {
+    public void initialize() {
+        registerButton.setOnAction(event -> registerHandle());
+    }
 
-        if (!agreeCheck.isSelected()) {
-            infoLabel.setText("Zaznacz zgodę.");
-            showAlert("Zaznacz zgodę.", Alert.AlertType.ERROR);
+    public void registerHandle() {
+        InputValidator inputValidator = InputValidator.getInstance();
+        if (!inputValidator.isValidUsername(usernameText.getText())) {
+            showAlert("Nazwa użytkownika musi zawierać co najmniej 8 znaków, w tym jedną cyfrę.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!inputValidator.isValidEmail(emailText.getText())) {
+            showAlert("Błędny format email.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!inputValidator.isValidPassword(passwdText.getText())) {
+            showAlert("Hasło musi zawierać co najmniej 8 znaków, w tym małą i dużą literę, cyfrę oraz znak specjalny.", Alert.AlertType.WARNING);
             return;
         }
 
@@ -56,14 +57,19 @@ public class RegisterController {
             return;
         }
 
-        boolean reg = userService.registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
+        if (!agreeCheck.isSelected()) {
+            infoLabel.setText("Zaznacz zgodę.");
+            showAlert("Zaznacz zgodę.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        boolean reg = UserService.getInstance().registerUser(usernameText.getText(), passwdText.getText(), emailText.getText(), nameText.getText(), surnameText.getText());
         if (reg) {
             infoLabel.setText("Pomyślnie zarejestrowano.");
             showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);
             clearRegisterPage();
 
-            scene.setRoot(views.get("repertoire-view"));
-
+            showRepertoirePanel();
             return;
         }
 
@@ -71,9 +77,17 @@ public class RegisterController {
         showAlert("Konto o takiej nazwie już istnieje.", Alert.AlertType.ERROR);
     }
 
+    private void showRepertoirePanel(){
+        RepertoireController repertoireController = ViewManager.getInstance().getController("repertoire-controller", RepertoireController.class);
+        if (repertoireController != null) {
+            new Thread(() -> repertoireController.loadRepertoireForDate(LocalDate.now())).start();
+        }
+        ViewManager.getInstance().switchTo("repertoire-view");
+    }
+
     @FXML
     public void loginLoadHandle(MouseEvent mouseEvent) {
-        scene.setRoot(views.get("login-view"));
+        ViewManager.getInstance().switchTo("login-view");
     }
 
     private void clearRegisterPage() {

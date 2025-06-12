@@ -10,6 +10,9 @@ public class SessionContext {
     @Getter
     @Setter
     private static String loggedInUserEmail;
+    @Getter
+    @Setter
+    private static String loggedInUserRole;
 
     public static void clear(){
         loggedInUserId = null;

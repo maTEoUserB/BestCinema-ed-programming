@@ -17,14 +17,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScreeningService {
-    private final MovieService movieService;
+    private static ScreeningService instance;
 
-    public ScreeningService(MovieService movieService) {
-        this.movieService = movieService;
+    private ScreeningService() {}
+
+    public static synchronized ScreeningService getInstance() {
+        if (instance == null) {
+            return new ScreeningService();
+        }
+        return instance;
     }
 
     public Screening saveScreening(MovieDTO movie, double price, int hallId, LocalDate date, int hour, int minute) {
-        long movieId = movieService.saveMovie(movie);
+        long movieId = MovieService.getInstance().saveMovie(movie);
 
         EntityManager em = JpaPersistenceUnit.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -44,23 +49,16 @@ public class ScreeningService {
             em.persist(screening);
 
             showAlert("Ekranizację zapisano do bazy!", Alert.AlertType.INFORMATION);
+            tx.commit();
             return screening;
         } catch (Exception e){
             if(tx.isActive()) tx.rollback();
             e.printStackTrace();
             showAlert("Nie udało się zapisać ekranizacji w bazie.", Alert.AlertType.ERROR);
         } finally {
-            if(tx.isActive()) tx.commit();
             em.close();
         }
         return null;
-    }
-
-    private void showAlert(String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     public List<ScreeningDTO> findScreenings(LocalDate date) {
@@ -77,6 +75,8 @@ public class ScreeningService {
                 .setParameter("end", endOfDay)
                 .getResultList();
 
+        em.close();
+
         return screenings.stream().map(s -> {
             ScreeningDTO screeningDTO = new ScreeningDTO();
             screeningDTO.setScreeningId(s.getScreeningId());
@@ -88,5 +88,28 @@ public class ScreeningService {
             screeningDTO.setImageUrl(s.getMovie().getImageUrl());
             return screeningDTO;
         }).collect(Collectors.toList());
+    }
+
+    public Screening getScreening(Long screeningId){
+        EntityManager em = JpaPersistenceUnit.getEntityManager();
+
+        Screening screening = em.createQuery(
+                        "SELECT s FROM Screening s " +
+                                "JOIN FETCH s.movie " +
+                                "WHERE s.screeningId = :id ",
+                        Screening.class)
+                .setParameter("id", screeningId)
+                .getSingleResult();
+
+        em.close();
+
+        return screening;
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

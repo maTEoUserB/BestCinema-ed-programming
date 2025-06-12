@@ -8,29 +8,37 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.MovieListCellController">
+<?import javafx.scene.image.ImageView?>
+<HBox alignment="TOP_LEFT" maxWidth="900" spacing="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.MovieListCellController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="554.0">
+       <ImageView fx:id="image" fitHeight="200" preserveRatio="true" smooth="true" />
+
+      <VBox spacing="5" maxWidth="600">
          <children>
-            <Label fx:id="titleLabel" prefHeight="27.0" prefWidth="315.0" text="Tytuł" />
-            <Label fx:id="overviewLabel" prefHeight="57.0" prefWidth="314.0" text="Opis" />
+            <Label fx:id="titleLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" wrapText="true" />
+            <Label fx:id="overviewLabel" wrapText="true" />
          </children>
       </VBox>
-      <VBox prefHeight="84.0" prefWidth="158.0">
+
+      <VBox spacing="5" maxWidth="160">
          <children>
             <TextField fx:id="priceField" promptText="Cena" />
             <TextField fx:id="hallField" promptText="Sala" />
             <DatePicker fx:id="datePicker" promptText="Data" />
          </children>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="146.0">
+
+      <VBox spacing="5" maxWidth="160">
          <children>
             <Label text="Godzina" />
             <Spinner fx:id="hourSpinner" />
             <Label text="Minuta" />
             <Spinner fx:id="minuteSpinner" />
-            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="142.0" text="Zapisz w repertuarze" />
+            <Button fx:id="saveButton"
+                    text="Zapisz w repertuarze"
+                    maxWidth="Infinity" />
          </children>
       </VBox>
    </children>
 </HBox>
+

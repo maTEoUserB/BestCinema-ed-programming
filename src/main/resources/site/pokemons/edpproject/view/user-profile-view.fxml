@@ -4,32 +4,43 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="570.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.pokemons.edpproject.controller.UserProfileController">
+<StackPane prefHeight="570.0"
+           prefWidth="910.0"
+           xmlns="http://javafx.com/javafx/22"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="site.pokemons.edpproject.controller.UserProfileController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="910.0">
+      <HBox maxHeight="100" StackPane.alignment="TOP_LEFT" spacing="10">
+         <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+         </padding>
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" onMouseClicked="#backToRepertoire" text="Wróć na stronę główną" />
-            <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="26.0" prefWidth="93.0" text="Wyloguj" />
+            <Button fx:id="backButton" mnemonicParsing="false" text="Wróć na stronę główną" />
+            <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="93.0" text="Wyloguj" />
          </children>
       </HBox>
-      <VBox layoutX="276.0" layoutY="134.0" prefHeight="382.0" prefWidth="358.0">
+      <VBox alignment="CENTER" spacing="10" maxWidth="360" maxHeight="400">
+         <padding>
+            <Insets top="20" right="40" bottom="20" left="40"/>
+         </padding>
          <children>
             <Label prefHeight="29.0" prefWidth="358.0" text="Edytuj profil" />
             <TextField fx:id="emailField" promptText="email" />
             <TextField fx:id="usernameField" promptText="username" />
             <TextField fx:id="nameField" promptText="Imię" />
             <TextField fx:id="surnameField" promptText="Nazwisko" />
-            <Button fx:id="changeButton" mnemonicParsing="false" onMouseClicked="#changeInformation" text="Zatwierdź zmiany" />
+            <Button fx:id="changeButton" mnemonicParsing="false" text="Zatwierdź zmiany" />
             <Label prefHeight="18.0" prefWidth="378.0" text="Zmiana hasła" />
             <PasswordField fx:id="passwordField" promptText="Aktualne hasło" />
             <PasswordField fx:id="newPasswordField" promptText="Nowe hasło" />
             <PasswordField fx:id="secondPasswordField" promptText="Powtórz nowe hasło" />
-            <Button fx:id="changePasswordButton" mnemonicParsing="false" onMouseClicked="#changePassword" text="Zmień hasło" />
+            <Button fx:id="changePasswordButton" mnemonicParsing="false" text="Zmień hasło" />
          </children>
       </VBox>
    </children>
-</AnchorPane>
+</StackPane>

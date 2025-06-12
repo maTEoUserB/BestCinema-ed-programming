@@ -2,7 +2,6 @@ package site.pokemons.edpproject.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservation_seats", uniqueConstraints = @UniqueConstraint(columnNames = {"reservation_id", "seat_id"}))
@@ -23,6 +22,10 @@ public class ReservationSeat {
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
 
-    private LocalDateTime lockedUntil; // opcjonalnie do blokady miejsca
+    @Column(name="occupied", nullable = false)
+    private boolean occupied;
+
+    @Column(name="is_reduced", nullable = false)
+    private boolean isReduced;
 }
 
