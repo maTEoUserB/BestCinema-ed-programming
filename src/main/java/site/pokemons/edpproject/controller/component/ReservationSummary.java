@@ -44,10 +44,4 @@ public class ReservationSummary extends HBox {
         seatsInfo.setText("Liczba miejsc: " + seatsCount);
         posterImage.setImage(poster);
     }
-
-//    @FXML
-//    private void handleClose() {
-//        AppEventBus.getInstance().post(new ReservationClosedEvent());
-//        ((Stage) this.getScene().getWindow()).close();
-//    }
 }

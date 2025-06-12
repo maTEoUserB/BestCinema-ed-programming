@@ -134,8 +134,3 @@ Label {
     -fx-border-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(127, 57, 251, 0.6), 8, 0, 0, 0);
 }
-
-.summary-button:hover {
-    -fx-background-color: #5e20c6;
-    -fx-effect: dropshadow(gaussian, rgba(94, 32, 198, 0.8), 10, 0, 0, 0);
-}
