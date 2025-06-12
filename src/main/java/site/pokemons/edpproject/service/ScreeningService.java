@@ -75,6 +75,8 @@ public class ScreeningService {
                 .setParameter("end", endOfDay)
                 .getResultList();
 
+        em.close();
+
         return screenings.stream().map(s -> {
             ScreeningDTO screeningDTO = new ScreeningDTO();
             screeningDTO.setScreeningId(s.getScreeningId());
@@ -86,6 +88,22 @@ public class ScreeningService {
             screeningDTO.setImageUrl(s.getMovie().getImageUrl());
             return screeningDTO;
         }).collect(Collectors.toList());
+    }
+
+    public Screening getScreening(Long screeningId){
+        EntityManager em = JpaPersistenceUnit.getEntityManager();
+
+        Screening screening = em.createQuery(
+                        "SELECT s FROM Screening s " +
+                                "JOIN FETCH s.movie " +
+                                "WHERE s.screeningId = :id ",
+                        Screening.class)
+                .setParameter("id", screeningId)
+                .getSingleResult();
+
+        em.close();
+
+        return screening;
     }
 
     private void showAlert(String message, Alert.AlertType type) {

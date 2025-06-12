@@ -1,24 +1,15 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 import site.pokemons.edpproject.session.SessionContext;
 import site.pokemons.edpproject.validator.InputValidator;
 
-import java.util.Map;
 
 public class UserProfileController {
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-
     @FXML
     private TextField emailField;
     @FXML
@@ -50,12 +41,13 @@ public class UserProfileController {
         changeButton.setOnAction(event -> changeInformation());
     }
 
-
     public void backToRepertoire() {
         if (SessionContext.getLoggedInUserRole().equals("USER")) {
-            scene.setRoot(views.get("repertoire-view"));
+            ViewManager.getInstance().switchTo("repertoire-view");
+//            scene.setRoot(views.get("repertoire-view"));
         } else {
-            scene.setRoot(views.get("admin-view"));
+            ViewManager.getInstance().switchTo("admin-view");
+//            scene.setRoot(views.get("admin-view"));
         }
     }
 
@@ -108,7 +100,8 @@ public class UserProfileController {
     }
 
     private void showLoginPanel() {
-        scene.setRoot(views.get("login-view"));
+        ViewManager.getInstance().switchTo("login-view");
+//        scene.setRoot(views.get("login-view"));
     }
 
     private void clearInformationFields() {

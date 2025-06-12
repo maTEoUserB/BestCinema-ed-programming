@@ -6,15 +6,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import lombok.Setter;
 import site.pokemons.edpproject.model.dbDto.ScreeningDTO;
 import site.pokemons.edpproject.service.EmailService;
 import site.pokemons.edpproject.service.webApi.YouTubeApiService;
@@ -22,7 +19,6 @@ import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 
 
 public class RepertoireListCellController {
@@ -38,13 +34,6 @@ public class RepertoireListCellController {
     private Button bookSeatsButton;
     @FXML
     private Button trailerButton;
-
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-    @Setter
-    private Map<String, Object> controllers;
 
     @FXML
     public void initialize() {
@@ -76,7 +65,7 @@ public class RepertoireListCellController {
             String body = "Rozpocząłeś rezerwację na film " + screening.getTitle() + ".";
             sendEmail(toEmail, subject, body);
 
-            CinemaHallController controller = (CinemaHallController) controllers.get("hall-controller");
+            CinemaHallController controller = ViewManager.getInstance().getController("hall-controller", CinemaHallController.class);
             controller.setHallNumber(screening.getHallId());
             controller.setScreeningId(screening.getScreeningId());
 
@@ -86,7 +75,7 @@ public class RepertoireListCellController {
     }
 
     private void showHallPanel() {
-        scene.setRoot(views.get("hall-view"));
+        ViewManager.getInstance().switchTo("hall-view");
     }
 
     private void showTrailerPanel(String videoId) {
@@ -104,13 +93,13 @@ public class RepertoireListCellController {
         WebView webView = new WebView();
         webView.getEngine().loadContent(content);
 
-        Parent previousRoot = scene.getRoot();
+        Parent previousRoot = ViewManager.getInstance().getScene().getRoot();
         Button backButton = new Button("Wróć");
         backButton.setOnAction(e -> {
             webView.getEngine().loadContent("<html><body></body></html>");
 
             PauseTransition pause = new PauseTransition(Duration.millis(200));
-            pause.setOnFinished(ev -> scene.setRoot(previousRoot));
+            pause.setOnFinished(ev -> ViewManager.getInstance().getScene().setRoot(previousRoot));
             pause.play();
         });
 
@@ -119,7 +108,7 @@ public class RepertoireListCellController {
         layout.setPadding(new Insets(10));
         layout.getChildren().addAll(backButton, webView);
 
-        scene.setRoot(layout);
+        ViewManager.getInstance().getScene().setRoot(layout);
 
     }
 
@@ -128,17 +117,15 @@ public class RepertoireListCellController {
             try {
                 EmailService.getInstance().sendEmail(toEmail, subject, body);
             } catch (MessagingException e) {
-                Platform.runLater(() -> {
-                    showAlert("Nie udało się wysłać rezerwacji na maila.", Alert.AlertType.ERROR);
-                });
+                Platform.runLater(this::showAlert);
             }
         }).start();
     }
 
-    private void showAlert(String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("Nie udało się wysłać rezerwacji na maila.");
         alert.showAndWait();
     }
 }

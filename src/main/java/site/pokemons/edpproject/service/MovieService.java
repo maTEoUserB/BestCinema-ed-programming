@@ -54,4 +54,14 @@ public class MovieService {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public Movie getMovie(Long screeningId) {
+        EntityManager em = JpaPersistenceUnit.getEntityManager();
+
+        Movie movie = em.createQuery("SELECT s.movie FROM Screening s WHERE s.screeningId = :id", Movie.class)
+                .setParameter("id", screeningId).getSingleResult();
+
+        em.close();
+        return movie;
+    }
 }

@@ -1,22 +1,15 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 import site.pokemons.edpproject.validator.InputValidator;
 
-import java.util.Map;
+import java.time.LocalDate;
+
 
 public class RegisterController {
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-
     @FXML
     private TextField usernameText;
     @FXML
@@ -41,7 +34,6 @@ public class RegisterController {
         registerButton.setOnAction(event -> registerHandle());
     }
 
-    @FXML
     public void registerHandle() {
         InputValidator inputValidator = InputValidator.getInstance();
         if (!inputValidator.isValidUsername(usernameText.getText())) {
@@ -77,8 +69,7 @@ public class RegisterController {
             showAlert("Pomyślnie zarejestrowano.", Alert.AlertType.INFORMATION);
             clearRegisterPage();
 
-            scene.setRoot(views.get("repertoire-view"));
-
+            showRepertoirePanel();
             return;
         }
 
@@ -86,9 +77,17 @@ public class RegisterController {
         showAlert("Konto o takiej nazwie już istnieje.", Alert.AlertType.ERROR);
     }
 
+    private void showRepertoirePanel(){
+        RepertoireController repertoireController = ViewManager.getInstance().getController("repertoire-controller", RepertoireController.class);
+        if (repertoireController != null) {
+            new Thread(() -> repertoireController.loadRepertoireForDate(LocalDate.now())).start();
+        }
+        ViewManager.getInstance().switchTo("repertoire-view");
+    }
+
     @FXML
     public void loginLoadHandle(MouseEvent mouseEvent) {
-        scene.setRoot(views.get("login-view"));
+        ViewManager.getInstance().switchTo("login-view");
     }
 
     private void clearRegisterPage() {

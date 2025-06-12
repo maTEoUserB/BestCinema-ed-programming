@@ -9,16 +9,12 @@ import site.pokemons.edpproject.controller.*;
 import site.pokemons.edpproject.model.db.JpaPersistenceUnit;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
-        //Utworzenie widoków przy starcie
-        Map<String, Parent> views = new HashMap<>();
-        //Utworzenie kontrolerów przy starcie
-        Map<String, Object> controllers = new HashMap<>();
+        //Inicjalizacja ViewManager
+        ViewManager vm = ViewManager.getInstance();
 
         //Inicjalizacja EntityManagerFactory
         new Thread(JpaPersistenceUnit::getEntityManager).start();
@@ -39,8 +35,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent repertoireView = fxmlRepertoireLoader.load();
-        views.put("repertoire-view", repertoireView);
-        controllers.put("repertoire-controller", repertoireController);
+        vm.addView("repertoire-view", repertoireView);
+        vm.addController("repertoire-controller", repertoireController);
 
         //HALL
         FXMLLoader fxmlHallLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/cinema-hall-view.fxml"));
@@ -58,8 +54,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent hallView = fxmlHallLoader.load();
-        views.put("hall-view", hallView);
-        controllers.put("hall-controller", hallController);
+        vm.addView("hall-view", hallView);
+        vm.addController("hall-controller", hallController);
 
         //ADMIN
         FXMLLoader fxmlAdminLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/admin-view.fxml"));
@@ -77,7 +73,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent adminView = fxmlAdminLoader.load();
-        views.put("admin-view", adminView);
+        vm.addView("admin-view", adminView);
+        vm.addController("admin-controller", adminController);
 
         //LOGIN
         FXMLLoader fxmlLoginLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/login-view.fxml"));
@@ -95,7 +92,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent loginView = fxmlLoginLoader.load();
-        views.put("login-view", loginView);
+        vm.addView("login-view", loginView);
+        vm.addController("login-controller", loginController);
 
         //USER PROFILE
         FXMLLoader fxmlProfileLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/user-profile-view.fxml"));
@@ -113,7 +111,8 @@ public class HelloApplication extends Application {
             }
         });
         Parent profileView = fxmlProfileLoader.load();
-        views.put("profile-view", profileView);
+        vm.addView("profile-view", profileView);
+        vm.addController("profile-controller", profileController);
 
         //WEJŚCIOWE OKNO REJESTRACJI
         FXMLLoader fxmlRegisterLoader = new FXMLLoader(getClass().getResource("/site/pokemons/edpproject/view/register-view.fxml"));
@@ -133,26 +132,13 @@ public class HelloApplication extends Application {
                 }
         });
         Parent registerView = fxmlRegisterLoader.load();
-        views.put("register-view", registerView);
+        vm.addView("register-view", registerView);
+        vm.addController("register-controller", regController);
 
-        regController.setViews(views);
-        adminController.setViews(views);
-        loginController.setViews(views);
-        repertoireController.setViews(views);
-        profileController.setViews(views);
-        hallController.setViews(views);
-
-        loginController.setControllers(controllers);
-        repertoireController.setControllers(controllers);
 
         Scene scene = new Scene(registerView);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-        regController.setScene(scene);
-        repertoireController.setScene(scene);
-        adminController.setScene(scene);
-        loginController.setScene(scene);
-        profileController.setScene(scene);
-        hallController.setScene(scene);
+        vm.setScene(scene);
         
         stage.setWidth(900);
         stage.setHeight(700);

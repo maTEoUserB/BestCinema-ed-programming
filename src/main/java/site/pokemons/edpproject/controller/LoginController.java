@@ -1,28 +1,17 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import lombok.Setter;
 import site.pokemons.edpproject.service.UserService;
 import site.pokemons.edpproject.session.SessionContext;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class LoginController {
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-    @Setter
-    private Map<String, Object> controllers;
-
     @FXML private Button loginButton;
     @FXML private TextField usernameText;
     @FXML private TextField passwdText;
@@ -52,7 +41,7 @@ public class LoginController {
         }
 
         infoLabel.setText("Błędne dane logowania.");
-        showAlert("Błędne dane logowania.", Alert.AlertType.ERROR);
+        showAlert();
     }
 
     private void clearLoginPage() {
@@ -62,27 +51,25 @@ public class LoginController {
     }
 
     private void showUserPanel() {
-        RepertoireController repertoireController = (RepertoireController) controllers.get("repertoire-controller");
+        RepertoireController repertoireController = ViewManager.getInstance().getController("repertoire-controller", RepertoireController.class);
         if (repertoireController != null) {
-            new Thread(() -> {
-                repertoireController.loadRepertoireForDate(LocalDate.now());
-            }).start();
+            new Thread(() -> repertoireController.loadRepertoireForDate(LocalDate.now())).start();
         }
-        scene.setRoot(views.get("repertoire-view"));
+        ViewManager.getInstance().switchTo("repertoire-view");
     }
 
     private void showAdminPanel() {
-        scene.setRoot(views.get("admin-view"));
+        ViewManager.getInstance().switchTo("admin-view");
     }
 
     public void registerLoadHandle(MouseEvent mouseEvent) {
-        scene.setRoot(views.get("register-view"));
+        ViewManager.getInstance().switchTo("register-view");
     }
 
-    private void showAlert(String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("Błędne dane logowania.");
         alert.showAndWait();
     }
 }

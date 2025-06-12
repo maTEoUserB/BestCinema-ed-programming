@@ -22,5 +22,4 @@ public class PersonRow {
         layout.getChildren().addAll(isReduced);
         reservationSeatId = id;
     }
-
 }

@@ -3,26 +3,28 @@ package site.pokemons.edpproject.controller;
 import jakarta.mail.MessagingException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import lombok.Setter;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import site.pokemons.edpproject.controller.component.PersonRow;
+import site.pokemons.edpproject.controller.component.ReservationSummary;
 import site.pokemons.edpproject.model.*;
-import site.pokemons.edpproject.service.EmailService;
-import site.pokemons.edpproject.service.ReservationService;
-import site.pokemons.edpproject.service.SeatService;
+import site.pokemons.edpproject.service.*;
 import site.pokemons.edpproject.session.SessionContext;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CinemaHallController {
     @FXML private AnchorPane rootPane;
@@ -34,10 +36,6 @@ public class CinemaHallController {
     private List<PersonRow> personRows = new ArrayList<>();
     private Reservation reservation;
     private Long screeningId;
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
     private List<Button> clickedSeats = new ArrayList<>();
     private List<String> occupiedSeats = new ArrayList<>();
 
@@ -67,13 +65,38 @@ public class CinemaHallController {
 
         String body = ReservationService.getInstance().getReservationInformation(reservation.getReservationId());
         sendEmail(SessionContext.getLoggedInUserEmail(), body);
+        int seatCount = personRows.toArray().length;
         personRows.clear();
         personList.getChildren().clear();
         for(Button button : clickedSeats) {
             button.getStyleClass().remove("seat-button-selected");
             button.getStyleClass().add("seat-button");
         }
-        scene.setRoot(views.get("repertoire-view"));
+        ViewManager.getInstance().switchTo("repertoire-view");
+
+        Screening screening = ScreeningService.getInstance().getScreening(screeningId);
+        Movie movie = MovieService.getInstance().getMovie(screeningId);
+        Platform.runLater(() -> showReservationSummary(
+                movie.getTitle(),
+                screening.getStartTime().toString(),
+                seatCount,
+                new Image("https://image.tmdb.org/t/p/w700" + movie.getImageUrl())
+        ));
+    }
+
+    private void showReservationSummary(String title, String time, int seatCount, Image poster) {
+        ReservationSummary summary = new ReservationSummary();
+        summary.setData(title, time, seatCount, poster);
+
+        Stage stage = new Stage();
+        stage.setWidth(300);
+        stage.setHeight(300);
+        stage.setTitle("Podsumowanie rezerwacji");
+        stage.setScene(new Scene(summary));
+        stage.initModality(Modality.NONE);
+        stage.setAlwaysOnTop(true);
+        stage.setResizable(false);
+        stage.show();
     }
 
     @FXML
@@ -86,7 +109,7 @@ public class CinemaHallController {
             button.getStyleClass().remove("seat-button-selected");
             button.getStyleClass().add("seat-button");
         }
-        scene.setRoot(views.get("repertoire-view"));
+        ViewManager.getInstance().switchTo("repertoire-view");
     }
 
     private Long addReservationSeat(String seatNumber) {

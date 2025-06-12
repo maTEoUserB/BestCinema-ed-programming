@@ -1,12 +1,8 @@
 package site.pokemons.edpproject.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import lombok.Setter;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
 import site.pokemons.edpproject.model.tmdbApiDto.NowPlayingResponse;
 import site.pokemons.edpproject.service.webApi.TmdbApiService;
@@ -14,31 +10,23 @@ import site.pokemons.edpproject.session.SessionContext;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public class AdminController {
     @FXML private Button logoutButton;
     @FXML private Button profileButton;
     @FXML private ListView<MovieDTO> movieList;
 
-    @Setter
-    private Scene scene;
-    @Setter
-    private Map<String, Parent> views;
-
 
     @FXML
-    public void initialize() throws IOException, InterruptedException {
+    public void initialize() {
         logoutButton.setOnAction(event -> logoutButtonClick());
         profileButton.setOnAction(event -> goToProfileView());
 
         new Thread(() -> {
-            NowPlayingResponse response = null;
+            NowPlayingResponse response;
             try {
                 response = TmdbApiService.getInstance().getMovieList();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
             List<MovieDTO> movies = response.getResults();
@@ -58,10 +46,10 @@ public class AdminController {
     }
 
     private void showLoginPanel() {
-        scene.setRoot(views.get("login-view"));
+        ViewManager.getInstance().switchTo("login-view");
     }
 
     private void showUserProfilePanel() {
-        scene.setRoot(views.get("profile-view"));
+        ViewManager.getInstance().switchTo("profile-view");
     }
 }

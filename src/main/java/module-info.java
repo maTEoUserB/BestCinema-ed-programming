@@ -18,8 +18,10 @@ module site.pokemons.edpproject {
     requires javafx.web;
     requires java.net.http;
     requires org.apache.commons.configuration2;
+    requires com.google.common;
     opens site.pokemons.edpproject.model to org.hibernate.orm.core;
     exports site.pokemons.edpproject.controller;
+    exports site.pokemons.edpproject.event;
     opens site.pokemons.edpproject.controller to javafx.fxml;
     exports site.pokemons.edpproject.service;
     opens site.pokemons.edpproject.service to javafx.fxml;
@@ -31,4 +33,6 @@ module site.pokemons.edpproject {
     opens site.pokemons.edpproject.model.db to javafx.fxml;
     exports site.pokemons.edpproject.service.webApi;
     opens site.pokemons.edpproject.service.webApi to javafx.fxml;
+    exports site.pokemons.edpproject.controller.component;
+    opens site.pokemons.edpproject.controller.component to javafx.fxml;
 }

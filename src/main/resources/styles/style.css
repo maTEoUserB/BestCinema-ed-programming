@@ -1,11 +1,9 @@
-/* Ustaw tło okna na bardzo ciemny szary (prawie czarny) */
 .root {
     -fx-background-color: #121212;
     -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    -fx-text-fill: #ddd; /* jasnoszary tekst */
+    -fx-text-fill: #ddd;
 }
 
-/* HBox i VBox - odstępy i wyrównanie */
 HBox {
     -fx-spacing: 15px;
     -fx-alignment: center-left;
@@ -16,32 +14,27 @@ VBox {
     -fx-spacing: 6px;
 }
 
-/* Label - jasnoszary tekst */
 Label {
     -fx-text-fill: #ddd;
 }
 
-/* Tytuł filmu - większy i pogrubiony */
 #titleLabel {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #bb86fc; /* jasny fiolet */
+    -fx-text-fill: #bb86fc;
 }
 
-/* Opis filmu - trochę mniejszy */
 #overviewLabel {
     -fx-font-size: 14px;
     -fx-text-fill: #aaa;
 }
 
-/* Czas rozpoczęcia - kursywa */
 #startTimeLabel {
     -fx-font-size: 13px;
     -fx-font-style: italic;
     -fx-text-fill: #ccc;
 }
 
-/* Przycisk "Zarezerwuj miejsca" - fioletowe tło i białe litery */
 #bookSeatsButton {
     -fx-background-color: #7f39fb;
     -fx-text-fill: white;
@@ -52,12 +45,10 @@ Label {
     -fx-border-color: transparent;
 }
 
-/* Przycisk po najechaniu */
 #bookSeatsButton:hover {
     -fx-background-color: #5e20c6;
 }
 
-/* Przycisk "Wyświetl repertuar" i "Wyloguj się" podobnie */
 #repertoireButton, .button {
     -fx-background-color: #7f39fb;
     -fx-text-fill: white;
@@ -67,7 +58,6 @@ Label {
     -fx-cursor: hand;
 }
 
-/* Hover dla tych przycisków */
 #repertoireButton:hover, .button:hover {
     -fx-background-color: #5e20c6;
 }
@@ -94,25 +84,21 @@ Label {
     -fx-border-color: transparent;
 }
 
-/* Styl dla obszaru przewijanego (viewport) */
 .scroll-pane > .viewport {
     -fx-background-color: #2b2b2b;
     -fx-text-fill: white;
 }
 
-/* Styl dla zawartości ScrollPane – czyli VBox z osobami */
 .scroll-pane .vbox {
     -fx-background-color: #2b2b2b;
     -fx-text-fill: white;
 }
 
-/* ListView - usuń domyślne obramowanie, ciemne tło */
 .list-view {
     -fx-background-color: #1e1e1e;
     -fx-border-color: transparent;
 }
 
-/* Każdy element listy będzie miał margines i delikatne tło */
 .list-cell {
     -fx-background-color: #222222;
     -fx-border-radius: 8px;
@@ -121,7 +107,35 @@ Label {
     -fx-margin: 6px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
 }
+
 .list-cell:filled:selected, .list-cell:filled:selected:focused {
     -fx-background-color: #7f39fb;
     -fx-text-fill: white;
+}
+
+.reservation-summary {
+    -fx-background-color: #121212;
+    -fx-text-fill: #ddd;
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-padding: 20px;
+}
+
+.reservation-summary Label {
+    -fx-text-fill: #ddd;
+}
+
+.summary-button {
+    -fx-background-color: #7f39fb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(127, 57, 251, 0.6), 8, 0, 0, 0);
+}
+
+.summary-button:hover {
+    -fx-background-color: #5e20c6;
+    -fx-effect: dropshadow(gaussian, rgba(94, 32, 198, 0.8), 10, 0, 0, 0);
 }

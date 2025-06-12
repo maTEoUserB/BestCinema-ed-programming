@@ -30,8 +30,7 @@ public class TmdbApiService {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        NowPlayingResponse nowPlayingResponse = new ObjectMapper().readValue(response.body(), NowPlayingResponse.class);
 
-        return nowPlayingResponse;
+        return new ObjectMapper().readValue(response.body(), NowPlayingResponse.class);
     }
 }

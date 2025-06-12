@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import site.pokemons.edpproject.model.tmdbApiDto.MovieDTO;
-import site.pokemons.edpproject.service.ScreeningService;
 
 import java.io.IOException;
 

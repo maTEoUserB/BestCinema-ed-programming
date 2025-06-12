@@ -18,12 +18,13 @@ public class InputValidator {
     }
 
     public boolean isValidPassword(String password) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{8,}$";
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
+
         return password != null && password.matches(regex);
     }
 
     public boolean isValidUsername(String username) {
-        String regex = "^(?=.*\\d)(?=.*[^\\w\\s]).{8,}$";
+        String regex = "^(?=.*\\d).{8,}$";
         return username != null && username.matches(regex);
     }
 }
