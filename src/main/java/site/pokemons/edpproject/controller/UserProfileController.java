@@ -85,7 +85,7 @@ public class UserProfileController {
         }
 
         InputValidator inputValidator = InputValidator.getInstance();
-        if (!inputValidator.isValidPassword(passwordField.getText())) {
+        if (!inputValidator.isValidPassword(newPasswordField.getText())) {
             showAlert("Hasło musi zawierać co najmniej 8 znaków, w tym małą i dużą literę, cyfrę oraz znak specjalny.", Alert.AlertType.WARNING);
             return;
         }

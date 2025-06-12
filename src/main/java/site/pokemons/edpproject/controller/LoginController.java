@@ -29,7 +29,6 @@ public class LoginController {
         clearLoginPage();
 
         if(log){
-            infoLabel.setText("Pomyślnie zalogowano.");
 
             if(userService.getAccountById(SessionContext.getLoggedInUserId()).getRole().equals("USER")){
                 showUserPanel();
